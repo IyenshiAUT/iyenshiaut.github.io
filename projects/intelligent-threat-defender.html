@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intelligent Threat Defender — Taneesha Iyenshi</title>
+    <meta name="description"
+        content="A real-time ML-powered browser extension for malicious URL detection and blocking.">
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+
+    <nav class="site-nav">
+        <div class="container nav-inner">
+            <a href="../index.html" class="nav-logo">T. Iyenshi</a>
+            <ul class="nav-links">
+                <li><a href="../index.html#interests">Research</a></li>
+                <li><a href="../index.html#skills">Skills</a></li>
+                <li><a href="../projects.html" class="nav-highlight active">Projects</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+
+        <div class="page-header">
+            <a href="../projects.html" class="back-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+                All Projects
+            </a>
+        </div>
+
+        <article class="project-detail">
+
+            <header class="project-detail-header">
+                <div class="project-detail-meta">
+                    <span class="project-year">2024</span>
+                    <span class="project-status status-completed">Completed</span>
+                </div>
+                <h1 class="project-detail-title">Intelligent Threat Defender</h1>
+                <div class="project-tags large-tags">
+                    <span>JavaScript</span><span>Machine Learning</span><span>NLP</span><span>Browser Extension</span>
+                </div>
+            </header>
+
+            <div class="project-detail-body">
+
+                <section class="detail-section">
+                    <h2>Overview</h2>
+                    <p>Intelligent Threat Defender is a browser extension designed to classify and block malicious URLs
+                        in real-time at the client side. Rather than relying solely on blocklists — which cannot keep up
+                        with the rate of new phishing and malware domains — the system employs a machine learning
+                        pipeline to detect novel, previously unseen threats based on URL structure and lexical
+                        properties.</p>
+                </section>
+
+                <section class="detail-section">
+                    <h2>Methodology</h2>
+                    <ul class="detail-list">
+                        <li><strong>Feature Extraction</strong> — URLs are parsed into lexical features (length, digit
+                            ratio, special character count, TLD entropy) and host-based features (domain age, IP
+                            presence, redirect depth).</li>
+                        <li><strong>ML Classification</strong> — A lightweight gradient-boosted decision tree model
+                            (optimized for inference speed) classifies each URL as benign or malicious.</li>
+                        <li><strong>Real-time Interception</strong> — The browser extension intercepts navigation
+                            events via the WebExtensions API before the page loads, querying the local model and
+                            blocking flagged URLs with a warning page.</li>
+                    </ul>
+                </section>
+
+                <section class="detail-section">
+                    <h2>Key Contributions</h2>
+                    <ul class="detail-list">
+                        <li>Achieved &gt; 95% classification accuracy on benchmark phishing datasets with sub-5ms
+                            inference time per URL.</li>
+                        <li>Entirely client-side inference — no data is sent to external servers, preserving user
+                            privacy.</li>
+                        <li>Lightweight model footprint (&lt; 500 KB), suitable for browser extension constraints.</li>
+                        <li>Extensible feature pipeline supporting future addition of NLP-based URL tokenisation.</li>
+                    </ul>
+                </section>
+
+                <section class="detail-section">
+                    <h2>Technologies Used</h2>
+                    <div class="project-tags large-tags">
+                        <span>JavaScript</span><span>WebExtensions API</span><span>Python (training)</span>
+                        <span>scikit-learn</span><span>ONNX Runtime</span><span>NLP</span>
+                    </div>
+                </section>
+
+            </div>
+
+        </article>
+
+        <div class="project-nav-row">
+            <a href="digital-watermarking.html" class="project-nav-btn">
+                ← Previous Project
+            </a>
+            <a href="ai-rehabilitation.html" class="project-nav-btn">
+                Next Project →
+            </a>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Taneesha Iyenshi &mdash; University of Ruhuna, Sri Lanka</p>
+    </footer>
+
+</body>
+
+</html>

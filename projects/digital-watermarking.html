@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Watermarking Protocol — Taneesha Iyenshi</title>
+    <meta name="description"
+        content="DWT-SVD hybrid watermarking system with chaotic encryption for robust invisible media authentication.">
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+
+    <nav class="site-nav">
+        <div class="container nav-inner">
+            <a href="../index.html" class="nav-logo">T. Iyenshi</a>
+            <ul class="nav-links">
+                <li><a href="../index.html#interests">Research</a></li>
+                <li><a href="../index.html#skills">Skills</a></li>
+                <li><a href="../projects.html" class="nav-highlight active">Projects</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+
+        <div class="page-header">
+            <a href="../projects.html" class="back-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+                All Projects
+            </a>
+        </div>
+
+        <article class="project-detail">
+
+            <header class="project-detail-header">
+                <div class="project-detail-meta">
+                    <span class="project-year">2024</span>
+                    <span class="project-status status-completed">Completed</span>
+                </div>
+                <h1 class="project-detail-title">Digital Watermarking Protocol</h1>
+                <div class="project-tags large-tags">
+                    <span>Python</span><span>Cryptography</span><span>DWT-SVD</span><span>Signal Processing</span>
+                </div>
+            </header>
+
+            <div class="project-detail-body">
+
+                <section class="detail-section">
+                    <h2>Overview</h2>
+                    <p>This project presents a hybrid digital watermarking protocol that combines the robustness of
+                        frequency-domain transforms with the unpredictability of chaotic encryption to achieve
+                        imperceptible yet highly resilient media authentication. The system targets a core challenge in
+                        digital forensics: embedding an ownership signature into multimedia content without degrading
+                        its perceptual quality.</p>
+                </section>
+
+                <section class="detail-section">
+                    <h2>Methodology</h2>
+                    <p>The approach integrates two well-established signal processing techniques:</p>
+                    <ul class="detail-list">
+                        <li><strong>Discrete Wavelet Transform (DWT)</strong> — decomposes the host image into
+                            frequency sub-bands, allowing the watermark to be embedded in perceptually significant
+                            regions.</li>
+                        <li><strong>Singular Value Decomposition (SVD)</strong> — applied to the selected sub-band
+                            coefficients, modifying singular values to encode the watermark in a mathematically stable
+                            manner.</li>
+                        <li><strong>Chaotic Encryption (Logistic Map)</strong> — the watermark itself is scrambled
+                            using a logistic map-based pseudo-random key generator before embedding, dramatically
+                            increasing resilience against extraction attempts.</li>
+                    </ul>
+                </section>
+
+                <section class="detail-section">
+                    <h2>Key Contributions</h2>
+                    <ul class="detail-list">
+                        <li>Demonstrated high imperceptibility (PSNR &gt; 40 dB) while maintaining robust
+                            extractability after JPEG compression, cropping, and noise attacks.</li>
+                        <li>Chaotic encryption layer significantly increases security against blind watermark
+                            extraction.</li>
+                        <li>Implemented a complete Python-based pipeline for embedding and blind extraction without
+                            access to the original host image.</li>
+                    </ul>
+                </section>
+
+                <section class="detail-section">
+                    <h2>Technologies Used</h2>
+                    <div class="project-tags large-tags">
+                        <span>Python</span><span>NumPy</span><span>PyWavelets</span><span>OpenCV</span>
+                        <span>Cryptography</span><span>DWT-SVD</span>
+                    </div>
+                </section>
+
+            </div>
+
+        </article>
+
+        <div class="project-nav-row">
+            <span></span>
+            <a href="intelligent-threat-defender.html" class="project-nav-btn">
+                Next Project →
+            </a>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Taneesha Iyenshi &mdash; University of Ruhuna, Sri Lanka</p>
+    </footer>
+
+</body>
+
+</html>
