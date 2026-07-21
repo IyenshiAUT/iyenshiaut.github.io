@@ -7,6 +7,14 @@
     --accent-color: #38bdf8;
     --accent-glow: rgba(56, 189, 248, 0.2);
     --accent-glow-strong: rgba(56, 189, 248, 0.4);
+    --accent-bg: rgba(56, 189, 248, 0.08);
+    --accent-bg-hover: rgba(56, 189, 248, 0.14);
+    --accent-bg-medium: rgba(56, 189, 248, 0.12);
+    --accent-border-soft: rgba(56, 189, 248, 0.15);
+    --accent-border: rgba(56, 189, 248, 0.22);
+    --shadow-hover-sm: 0 6px 20px rgba(56, 189, 248, 0.08);
+    --shadow-hover-md: 0 6px 22px rgba(56, 189, 248, 0.10);
+    --shadow-hover-lg: 0 6px 24px rgba(56, 189, 248, 0.11);
     --card-bg: #1e293b;
     --border-color: #334155;
     --nav-height: 56px;
@@ -27,6 +35,14 @@ html.light-mode {
     --accent-color: #0284c7;
     --accent-glow: rgba(2, 132, 199, 0.12);
     --accent-glow-strong: rgba(2, 132, 199, 0.32);
+    --accent-bg: rgba(2, 132, 199, 0.08);
+    --accent-bg-hover: rgba(2, 132, 199, 0.14);
+    --accent-bg-medium: rgba(2, 132, 199, 0.12);
+    --accent-border-soft: rgba(2, 132, 199, 0.15);
+    --accent-border: rgba(2, 132, 199, 0.22);
+    --shadow-hover-sm: 0 6px 20px rgba(2, 132, 199, 0.08);
+    --shadow-hover-md: 0 6px 22px rgba(2, 132, 199, 0.10);
+    --shadow-hover-lg: 0 6px 24px rgba(2, 132, 199, 0.11);
     --card-bg: #ffffff;
     --border-color: #e2e8f0;
     --nav-bg: rgba(248, 250, 252, 0.88);
@@ -49,6 +65,7 @@ body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     line-height: 1.6;
     padding-top: var(--nav-height);
+    transition: background-color 0.25s ease, color 0.25s ease;
 }
 
 .container {
@@ -106,10 +123,10 @@ body {
 
 .nav-links a.nav-highlight {
     color: var(--accent-color);
-    background: rgba(56, 189, 248, 0.08);
-    border: 1px solid rgba(56, 189, 248, 0.2);
+    background: var(--accent-bg);
+    border: 1px solid var(--accent-glow);
 }
-.nav-links a.nav-highlight:hover { background: rgba(56, 189, 248, 0.14); }
+.nav-links a.nav-highlight:hover { background: var(--accent-bg-hover); }
 
 /* ─── Two-column page layout ─────────────────────────── */
 .page-layout {
@@ -348,7 +365,7 @@ h2::before {
 .interest-card:hover {
     transform: translateY(-3px);
     border-color: var(--accent-color);
-    box-shadow: 0 6px 22px rgba(56, 189, 248, 0.1);
+    box-shadow: var(--shadow-hover-md);
 }
 .interest-card h3 { font-size: 0.93rem; font-weight: 700; margin-bottom: 0.5rem; }
 .interest-card p  { color: var(--text-muted); font-size: 0.85rem; line-height: 1.65; }
@@ -384,9 +401,9 @@ h2::before {
 }
 
 .type-conference {
-    background: rgba(56, 189, 248, 0.12);
+    background: var(--accent-bg-medium);
     color: var(--accent-color);
-    border: 1px solid rgba(56, 189, 248, 0.22);
+    border: 1px solid var(--accent-border);
 }
 
 .type-patent {
@@ -452,13 +469,13 @@ h2::before {
     text-decoration: none;
     padding: 0.2rem 0.55rem;
     border-radius: 4px;
-    background: rgba(56, 189, 248, 0.08);
-    border: 1px solid rgba(56, 189, 248, 0.15);
+    background: var(--accent-bg);
+    border: 1px solid var(--accent-border-soft);
     transition: background 0.2s, border-color 0.2s;
 }
 
 .pub-doi:hover {
-    background: rgba(56, 189, 248, 0.15);
+    background: var(--accent-border-soft);
     border-color: var(--accent-color);
 }
 
@@ -501,7 +518,7 @@ h2::before {
 .project-card:hover {
     transform: translateY(-3px);
     border-color: var(--accent-color);
-    box-shadow: 0 6px 24px rgba(56, 189, 248, 0.11);
+    box-shadow: var(--shadow-hover-lg);
 }
 
 .project-card-meta {
@@ -549,14 +566,14 @@ h2::before {
 }
 .project-tags span {
     font-size: 0.67rem;
-    background: rgba(56, 189, 248, 0.08);
+    background: var(--accent-bg);
     color: var(--accent-color);
     padding: 0.18rem 0.55rem;
     border-radius: 5px;
     font-weight: 600;
     letter-spacing: 0.03em;
     text-transform: uppercase;
-    border: 1px solid rgba(56, 189, 248, 0.15);
+    border: 1px solid var(--accent-border-soft);
 }
 
 .large-tags span { font-size: 0.76rem; padding: 0.28rem 0.7rem; }
@@ -747,8 +764,8 @@ footer {
     font-size: 0.72rem;
     font-weight: 700;
     color: var(--accent-color);
-    background: rgba(56, 189, 248, 0.08);
-    border: 1px solid rgba(56, 189, 248, 0.15);
+    background: var(--accent-bg);
+    border: 1px solid var(--accent-border-soft);
     padding: 0.2rem 0.6rem;
     border-radius: 20px;
     white-space: nowrap;
@@ -828,7 +845,7 @@ footer {
 .timeline-card:hover {
     transform: translateY(-2px);
     border-color: var(--accent-color);
-    box-shadow: 0 6px 20px rgba(56, 189, 248, 0.08);
+    box-shadow: var(--shadow-hover-sm);
 }
 
 .timeline-header {
@@ -842,8 +859,8 @@ footer {
     font-size: 0.72rem;
     font-weight: 700;
     color: var(--accent-color);
-    background: rgba(56, 189, 248, 0.08);
-    border: 1px solid rgba(56, 189, 248, 0.15);
+    background: var(--accent-bg);
+    border: 1px solid var(--accent-border-soft);
     padding: 0.15rem 0.6rem;
     border-radius: 20px;
     margin-bottom: 0.45rem;
