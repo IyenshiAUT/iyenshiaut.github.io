@@ -4,10 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI-Integrated Rehabilitation System — Taneesha Iyenshi</title>
+    <title>AI-Integrated Hand Function Recovery System — Taneesha Iyenshi</title>
     <meta name="description"
-        content="Smart glove sensory system with AI feedback mapping for clinical neuro-rehabilitation.">
+        content="An AI-driven rehabilitation platform integrating markerless hand tracking, gamified mobile exercises, a sensor-based smart glove, and real-time clinical monitoring to support personalized stroke hand rehabilitation.">
     <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="ai-rehabilitation.css">
     <script src="../theme.js"></script>
 </head>
 
@@ -30,9 +31,9 @@
         </div>
     </nav>
 
-    <main class="container">
+    <main class="container rehab-main">
 
-        <div class="page-header">
+        <div class="page-header" style="padding-bottom:0;">
             <a href="../projects" class="back-link">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -42,76 +43,578 @@
             </a>
         </div>
 
-        <article class="project-detail">
-
-            <header class="project-detail-header">
-                <div class="project-detail-meta">
-                    <span class="project-year">2023</span>
-                    <span class="project-status status-completed">Completed</span>
-                </div>
-                <h1 class="project-detail-title">AI-Integrated Rehabilitation System</h1>
-                <div class="project-tags large-tags">
-                    <span>Hardware</span><span>AI Systems</span><span>Embedded C</span><span>Mobile</span>
-                </div>
-            </header>
-
-            <div class="project-detail-body">
-
-                <section class="detail-section">
-                    <h2>Overview</h2>
-                    <p>This collaborative project developed a wearable smart glove system for clinical
-                        neuro-rehabilitation, targeting patients recovering from stroke or neurological conditions
-                        affecting fine motor control. The system integrates embedded sensor hardware with an AI-driven
-                        mobile application to deliver gamified, real-time therapy exercises, increasing patient
-                        motivation and enabling clinicians to monitor progress remotely.</p>
-                </section>
-
-                <section class="detail-section">
-                    <h2>System Architecture</h2>
-                    <ul class="detail-list">
-                        <li><strong>Smart Glove Hardware</strong> — Flex sensors, IMU (accelerometer + gyroscope), and
-                            haptic feedback actuators embedded in a wearable glove form factor, communicating over
-                            Bluetooth Low Energy (BLE).</li>
-                        <li><strong>Embedded Firmware</strong> — Written in C for a microcontroller platform,
-                            responsible for real-time sensor fusion, data buffering, and BLE transmission.</li>
-                        <li><strong>AI Feedback Engine</strong> — A gesture classification model maps sensor streams
-                            to discrete hand gestures, scoring therapy exercise execution and adapting difficulty
-                            dynamically.</li>
-                        <li><strong>Mobile Gaming Interface</strong> — A mobile application renders interactive
-                            rehabilitation exercises as games, receiving gesture classification results to drive
-                            in-game actions and provide immediate visual/haptic feedback.</li>
-                    </ul>
-                </section>
-
-                <section class="detail-section">
-                    <h2>Key Contributions</h2>
-                    <ul class="detail-list">
-                        <li>Designed and implemented the embedded firmware for real-time sensor data acquisition and
-                            BLE communication.</li>
-                        <li>Integrated the AI gesture classification pipeline between the hardware data stream and
-                            the mobile application layer.</li>
-                        <li>System demonstrated measurable improvement in patient engagement metrics compared to
-                            traditional passive rehabilitation methods in preliminary clinical observations.</li>
-                    </ul>
-                </section>
-
-                <section class="detail-section">
-                    <h2>Technologies Used</h2>
-                    <div class="project-tags large-tags">
-                        <span>Embedded C</span><span>BLE</span><span>IMU Sensor Fusion</span>
-                        <span>TensorFlow Lite</span><span>Mobile Development</span><span>Hardware Prototyping</span>
-                    </div>
-                </section>
-
+        <!-- ═══ 1. PROJECT HEADER ═══ -->
+        <header class="rh-hero">
+            <div class="rh-hero-meta">
+                <span class="project-status status-completed">Completed</span>
+                <span class="rh-year-badge">2024 &ndash; 2025</span>
+                <span class="rh-domain-badge">Undergraduate Final-Year Research Project</span>
             </div>
+            <h1 class="rh-title">AI-Integrated Hand Function Recovery System with Mobile Gaming &amp; Smart Glove for Stroke Rehabilitation</h1>
+            <p class="rh-one-liner">An AI-driven rehabilitation platform integrating markerless hand tracking, gamified mobile exercises, a sensor-based smart glove, and real-time clinical monitoring to support personalized stroke hand rehabilitation.</p>
+            <div class="rh-meta-grid">
+                <div class="rh-meta-item">
+                    <span class="rh-meta-label">Institution</span>
+                    <span class="rh-meta-value">University of Ruhuna, Sri Lanka</span>
+                </div>
+                <div class="rh-meta-item">
+                    <span class="rh-meta-label">Role</span>
+                    <span class="rh-meta-value">Movement Tracking &amp; Scoring &middot; AI &amp; QA Contributions</span>
+                </div>
+                <div class="rh-meta-item">
+                    <span class="rh-meta-label">Team</span>
+                    <span class="rh-meta-value">4 Members</span>
+                </div>
+                <div class="rh-meta-item">
+                    <span class="rh-meta-label">Domain</span>
+                    <span class="rh-meta-value">AI &middot; Computer Vision &middot; ML &middot; IoT &middot; Healthcare Technology</span>
+                </div>
+            </div>
+            <div class="project-tags large-tags" style="margin-top:1.5rem;">
+                <span>Python</span><span>MediaPipe</span><span>LSTM</span><span>Transfer Learning</span>
+                <span>Flutter</span><span>ESP32</span><span>Spring Boot</span><span>React</span><span>AWS</span>
+            </div>
+        </header>
 
-        </article>
+        <!-- ═══ 3. PROBLEM ═══ -->
+        <section class="rh-section" id="problem">
+            <h2 class="rh-section-title">The Problem with Traditional Rehabilitation</h2>
+            <div class="rh-problem-grid">
+                <div class="rh-problem-card">
+                    <div class="rh-problem-icon">&#x1F468;&#x200D;&#x2695;&#xFE0F;</div>
+                    <div class="rh-problem-arrow">&rarr;</div>
+                    <div class="rh-problem-text"><strong>Limited Therapists</strong><span>Insufficient supervision time per patient</span></div>
+                </div>
+                <div class="rh-problem-card">
+                    <div class="rh-problem-icon">&#x1F501;</div>
+                    <div class="rh-problem-arrow">&rarr;</div>
+                    <div class="rh-problem-text"><strong>Repetitive Exercises</strong><span>Low patient motivation &amp; engagement</span></div>
+                </div>
+                <div class="rh-problem-card">
+                    <div class="rh-problem-icon">&#x1F4CA;</div>
+                    <div class="rh-problem-arrow">&rarr;</div>
+                    <div class="rh-problem-text"><strong>No Continuous Monitoring</strong><span>Limited visibility into rehabilitation progress</span></div>
+                </div>
+                <div class="rh-problem-card">
+                    <div class="rh-problem-icon">&#x1F4CB;</div>
+                    <div class="rh-problem-arrow">&rarr;</div>
+                    <div class="rh-problem-text"><strong>Generic Exercises</strong><span>No individualized rehabilitation planning</span></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══ 4. ARCHITECTURE ═══ -->
+        <section class="rh-section" id="architecture">
+            <h2 class="rh-section-title">System Architecture</h2>
+            <p class="rh-section-sub">Three tightly integrated subsystems work in concert, connected through a shared backend and real-time data pipeline.</p>
+            <div class="rh-arch-flow">
+                <div class="rh-arch-node rh-arch-patient">
+                    <div class="rh-arch-icon">&#x1F9D1;&#x200D;&#x1F9BD;</div>
+                    <strong>Patient</strong>
+                </div>
+                <div class="rh-arch-connector">&darr;</div>
+                <div class="rh-arch-node rh-arch-mobile">
+                    <div class="rh-arch-node-header">
+                        <div class="rh-arch-icon">&#x1F4F1;</div>
+                        <strong>Mobile Application</strong>
+                        <span class="rh-arch-tag">Flutter &middot; Android</span>
+                    </div>
+                    <ul>
+                        <li>Gamified rehabilitation exercises</li>
+                        <li>Markerless hand tracking via camera</li>
+                        <li>Exercise scoring &amp; performance feedback</li>
+                        <li>AI-driven level recommendation</li>
+                    </ul>
+                </div>
+                <div class="rh-arch-connector">&darr;&nbsp;&darr;</div>
+                <div class="rh-arch-row">
+                    <div class="rh-arch-node rh-arch-glove">
+                        <div class="rh-arch-node-header">
+                            <div class="rh-arch-icon">&#x1F9E4;</div>
+                            <strong>Smart Glove</strong>
+                            <span class="rh-arch-tag">ESP32 &middot; FSR &middot; MQTT</span>
+                        </div>
+                        <ul>
+                            <li>Force Sensitive Resistors (FSRs)</li>
+                            <li>Relative fingertip force measurement</li>
+                            <li>Real-time wireless data transmission</li>
+                        </ul>
+                    </div>
+                    <div class="rh-arch-node rh-arch-backend">
+                        <div class="rh-arch-node-header">
+                            <div class="rh-arch-icon">&#x2601;&#xFE0F;</div>
+                            <strong>Backend / Cloud</strong>
+                            <span class="rh-arch-tag">Spring Boot &middot; AWS EC2</span>
+                        </div>
+                        <ul>
+                            <li>REST APIs &amp; microservices</li>
+                            <li>PostgreSQL database</li>
+                            <li>AI inference engine</li>
+                            <li>Real-time data pipeline</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="rh-arch-connector">&darr;</div>
+                <div class="rh-arch-node rh-arch-web">
+                    <div class="rh-arch-node-header">
+                        <div class="rh-arch-icon">&#x1F5A5;&#xFE0F;</div>
+                        <strong>Clinician Web Application</strong>
+                        <span class="rh-arch-tag">React &middot; Interactive Dashboards</span>
+                    </div>
+                    <ul>
+                        <li>Patient management &amp; session tracking</li>
+                        <li>Real-time grip force measurements</li>
+                        <li>Rehabilitation progress analytics</li>
+                        <li>AI-assisted recommendations</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══ 5. MY CONTRIBUTION ═══ -->
+        <section class="rh-section rh-contribution-section" id="contribution">
+            <div class="rh-contribution-badge">My Contribution</div>
+            <h2 class="rh-section-title">Movement Tracking &amp; Scoring Mechanism</h2>
+            <p class="rh-section-sub">As identified in the project responsibility matrix, I led the design and implementation of the computer vision&ndash;based hand tracking and exercise scoring subsystem &mdash; the core evaluation engine of the mobile rehabilitation component.</p>
+            <div class="rh-contribution-grid">
+                <div class="rh-contrib-item">
+                    <div class="rh-contrib-num">01</div>
+                    <h3>Markerless Hand Tracking</h3>
+                    <p>Integrated MediaPipe Hand Landmark detection to track hand movements without any wearable markers using the device camera.</p>
+                </div>
+                <div class="rh-contrib-item">
+                    <div class="rh-contrib-num">02</div>
+                    <h3>Landmark Extraction</h3>
+                    <p>Extracted all 21 MediaPipe hand landmarks per frame, capturing fine-grained finger and wrist joint positions.</p>
+                </div>
+                <div class="rh-contrib-item">
+                    <div class="rh-contrib-num">03</div>
+                    <h3>Landmark Normalization</h3>
+                    <p>Normalized landmark coordinates to eliminate camera distance and orientation bias, ensuring consistent scoring.</p>
+                </div>
+                <div class="rh-contrib-item">
+                    <div class="rh-contrib-num">04</div>
+                    <h3>Movement Analysis</h3>
+                    <p>Analysed multi-joint kinematics across frames to characterize movement quality and range of motion.</p>
+                </div>
+                <div class="rh-contrib-item">
+                    <div class="rh-contrib-num">05</div>
+                    <h3>Exercise-Specific Scoring</h3>
+                    <p>Designed separate scoring algorithms for each rehabilitation exercise: pinch grip, cylindrical grip, spherical grip, and wrist rotation.</p>
+                </div>
+                <div class="rh-contrib-item">
+                    <div class="rh-contrib-num">06</div>
+                    <h3>Performance Evaluation &amp; Fine-Tuning</h3>
+                    <p>Tested scoring against clinician benchmarks, iteratively tuned thresholds, and validated accuracy against clinical ground truth.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══ 10. HAND TRACKING PIPELINE ═══ -->
+        <section class="rh-section" id="hand-tracking">
+            <h2 class="rh-section-title">Markerless Hand Tracking Pipeline</h2>
+            <p class="rh-section-sub">The vision pipeline transforms raw camera frames into quantitative exercise scores entirely on-device.</p>
+            <div class="rh-pipeline">
+                <div class="rh-pipe-step"><div class="rh-pipe-icon">&#x1F4F7;</div><div class="rh-pipe-label">Camera Frame</div></div>
+                <div class="rh-pipe-arrow">&rarr;</div>
+                <div class="rh-pipe-step"><div class="rh-pipe-icon">&#x1F916;</div><div class="rh-pipe-label">MediaPipe<br><small>Hand detection</small></div></div>
+                <div class="rh-pipe-arrow">&rarr;</div>
+                <div class="rh-pipe-step"><div class="rh-pipe-icon">&#x270B;</div><div class="rh-pipe-label">21 Landmarks<br><small>3D coordinates</small></div></div>
+                <div class="rh-pipe-arrow">&rarr;</div>
+                <div class="rh-pipe-step"><div class="rh-pipe-icon">&#x1F4D0;</div><div class="rh-pipe-label">Normalization<br><small>Scale &amp; orient</small></div></div>
+                <div class="rh-pipe-arrow">&rarr;</div>
+                <div class="rh-pipe-step"><div class="rh-pipe-icon">&#x1F52C;</div><div class="rh-pipe-label">Movement<br>Analysis</div></div>
+                <div class="rh-pipe-arrow">&rarr;</div>
+                <div class="rh-pipe-step rh-pipe-final"><div class="rh-pipe-icon">&#x1F3AF;</div><div class="rh-pipe-label">Exercise Score</div></div>
+            </div>
+        </section>
+
+        <!-- ═══ 7. AI MODEL ═══ -->
+        <section class="rh-section" id="ai-model">
+            <h2 class="rh-section-title">AI-Based Personalized Level Recommendation</h2>
+            <p class="rh-section-sub">An LSTM-based temporal model learns each patient's individual rehabilitation trajectory and predicts the optimal next exercise level.</p>
+            <div class="rh-ai-flow">
+                <div class="rh-ai-block rh-ai-input">
+                    <div class="rh-ai-block-title">Input</div>
+                    <div class="rh-ai-block-body">
+                        <p>Previous rehabilitation sessions</p>
+                        <ul>
+                            <li>Session number &amp; days elapsed</li>
+                            <li>Previous scores &amp; improvement rate</li>
+                            <li>Patient characteristics</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="rh-ai-arrow">&darr;</div>
+                <div class="rh-ai-block rh-ai-fe">
+                    <div class="rh-ai-block-title">Feature Engineering</div>
+                    <div class="rh-ai-block-body">
+                        <p>3-session sliding window</p>
+                        <p>Temporal rehabilitation features</p>
+                    </div>
+                </div>
+                <div class="rh-ai-arrow">&darr;</div>
+                <div class="rh-ai-block rh-ai-model-block">
+                    <div class="rh-ai-block-title">Stacked LSTM</div>
+                    <div class="rh-ai-block-body">
+                        <p>3 timesteps &rarr; temporal representation &rarr; predicted MRC level</p>
+                        <p class="rh-ai-note">Transfer Learning: pre-trained on population data, fine-tuned per patient in ~45 min</p>
+                    </div>
+                </div>
+                <div class="rh-ai-arrow">&darr;</div>
+                <div class="rh-ai-block rh-ai-output">
+                    <div class="rh-ai-block-title">Recommendation</div>
+                    <div class="rh-ai-block-body">
+                        <p>Next rehabilitation level + confidence score</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══ 8. AI RESULTS ═══ -->
+        <section class="rh-section" id="ai-results">
+            <h2 class="rh-section-title">AI Performance Metrics</h2>
+            <p class="rh-section-sub">Transfer learning delivered dramatic gains in personalization efficiency.</p>
+            <div class="rh-metrics-grid">
+                <div class="rh-metric-card">
+                    <div class="rh-metric-num">87.3<span class="rh-metric-pct">%</span></div>
+                    <div class="rh-metric-label">Patient-Specific Accuracy</div>
+                    <div class="rh-metric-sub">After transfer learning fine-tuning (up from 68% baseline)</div>
+                </div>
+                <div class="rh-metric-card">
+                    <div class="rh-metric-num">82.3<span class="rh-metric-pct">%</span></div>
+                    <div class="rh-metric-label">General Model Accuracy</div>
+                    <div class="rh-metric-sub">Across the population baseline model</div>
+                </div>
+                <div class="rh-metric-card">
+                    <div class="rh-metric-num">70<span class="rh-metric-pct">%</span></div>
+                    <div class="rh-metric-label">Reduction in Training Time</div>
+                    <div class="rh-metric-sub">~45 min per patient vs. 6&ndash;8 hours from scratch</div>
+                </div>
+                <div class="rh-metric-card">
+                    <div class="rh-metric-num">80<span class="rh-metric-pct">%</span></div>
+                    <div class="rh-metric-label">Reduction in Required Data</div>
+                    <div class="rh-metric-sub">5&ndash;10 sessions vs. 50+ without transfer learning</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══ 9. SMART GLOVE ═══ -->
+        <section class="rh-section" id="smart-glove">
+            <h2 class="rh-section-title">Smart Glove</h2>
+            <p class="rh-section-sub">A purpose-built wearable device measures relative fingertip force during predefined hand functions, providing a complementary muscle-strength signal alongside camera-based movement data.</p>
+            <div class="rh-glove-layout">
+                <div class="rh-glove-specs">
+                    <div class="rh-spec-item">
+                        <div class="rh-spec-icon">&#x26A1;</div>
+                        <div><strong>ESP32 Microcontroller</strong><p>Wi-Fi enabled, low-power, real-time data processing</p></div>
+                    </div>
+                    <div class="rh-spec-item">
+                        <div class="rh-spec-icon">&#x1F534;</div>
+                        <div><strong>Force Sensitive Resistors (FSRs)</strong><p>Placed at key fingertip locations for relative force measurement</p></div>
+                    </div>
+                    <div class="rh-spec-item">
+                        <div class="rh-spec-icon">&#x1F4E1;</div>
+                        <div><strong>MQTT over Wi-Fi</strong><p>Low-latency wireless transmission to backend pipeline</p></div>
+                    </div>
+                    <div class="rh-spec-item">
+                        <div class="rh-spec-icon">&#x1F50B;</div>
+                        <div><strong>Battery-Powered Design</strong><p>Self-contained, portable design for clinical and home use</p></div>
+                    </div>
+                    <div class="rh-spec-item">
+                        <div class="rh-spec-icon">&#x23F1;&#xFE0F;</div>
+                        <div><strong>Real-Time Measurements</strong><p>Continuous streaming to clinician dashboard with minimal latency</p></div>
+                    </div>
+                </div>
+                <div class="rh-glove-visual">
+                    <div class="rh-glove-diagram">
+                        <div class="rh-glove-emoji-wrap">&#x1F9E4;</div>
+                        <div class="rh-glove-legend">FSR sensors at key fingertip positions</div>
+                        <div class="rh-glove-chip">ESP32 + MQTT</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══ 11. EXERCISES ═══ -->
+        <section class="rh-section" id="exercises">
+            <h2 class="rh-section-title">Targeted Hand Functions</h2>
+            <p class="rh-section-sub">The system targets three core functional hand activities across eight exercise levels covering different movement conditions and difficulty gradations.</p>
+            <div class="rh-exercises-grid">
+                <div class="rh-exercise-card">
+                    <div class="rh-exercise-emoji">&#x270D;&#xFE0F;</div>
+                    <h3>Pinch / Pen Grip</h3>
+                    <p>Precision pinch movements targeting fine motor control essential for daily writing and manipulation tasks.</p>
+                </div>
+                <div class="rh-exercise-card">
+                    <div class="rh-exercise-emoji">&#x1F37C;</div>
+                    <h3>Cylindrical Grip</h3>
+                    <p>Whole-hand power grip exercises simulating holding cylindrical objects such as cups or bottles.</p>
+                </div>
+                <div class="rh-exercise-card">
+                    <div class="rh-exercise-emoji">&#x1F3C0;</div>
+                    <h3>Spherical Grip</h3>
+                    <p>Spherical grasp exercises targeting the coordination required to hold ball-shaped or rounded objects.</p>
+                </div>
+                <div class="rh-exercise-card">
+                    <div class="rh-exercise-emoji">&#x1F504;</div>
+                    <h3>Wrist Rotation</h3>
+                    <p>Pronation and supination exercises to restore range of motion and coordination in the wrist joint.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══ 12. GAMIFICATION ═══ -->
+        <section class="rh-section" id="gamification">
+            <h2 class="rh-section-title">Gamification</h2>
+            <p class="rh-section-sub">Rehabilitation exercises were transformed into interactive game-based activities to improve patient engagement and motivation. Clinical feedback reported positive patient reactions and clinician appreciation of the gamified approach.</p>
+            <div class="rh-games-grid">
+                <div class="rh-game-card">
+                    <div class="rh-game-emoji">&#x1F300;</div>
+                    <div class="rh-game-name">Spinner Game</div>
+                    <div class="rh-game-desc">Wrist rotation exercise transformed into an interactive spinner challenge</div>
+                </div>
+                <div class="rh-game-card">
+                    <div class="rh-game-emoji">&#x1F41D;</div>
+                    <div class="rh-game-name">Cosmic Bee</div>
+                    <div class="rh-game-desc">Finger coordination game using pinch grip interactions</div>
+                </div>
+                <div class="rh-game-card">
+                    <div class="rh-game-emoji">&#x1F41D;</div>
+                    <div class="rh-game-name">Bee Round</div>
+                    <div class="rh-game-desc">Cylindrical grip exercise embedded in a bee-themed game mechanic</div>
+                </div>
+                <div class="rh-game-card">
+                    <div class="rh-game-emoji">&#x1F3AF;</div>
+                    <div class="rh-game-name">Shoot Ball</div>
+                    <div class="rh-game-desc">Spherical grip targeting game with real-time score feedback</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══ 13. CLINICAL RESULTS ═══ -->
+        <section class="rh-section" id="clinical">
+            <h2 class="rh-section-title">Clinical Evaluation Results</h2>
+            <p class="rh-section-sub">A pilot clinical study with two stroke patients over 10 sessions and 30 days demonstrated measurable rehabilitation improvement across both modalities.</p>
+            <div class="rh-clinical-meta">
+                <div class="rh-clin-stat"><span class="rh-clin-num">2</span><span class="rh-clin-lbl">Patients</span></div>
+                <div class="rh-clin-divider"></div>
+                <div class="rh-clin-stat"><span class="rh-clin-num">10</span><span class="rh-clin-lbl">Sessions</span></div>
+                <div class="rh-clin-divider"></div>
+                <div class="rh-clin-stat"><span class="rh-clin-num">30</span><span class="rh-clin-lbl">Days</span></div>
+            </div>
+            <div class="rh-clinical-results">
+                <div class="rh-clin-card">
+                    <div class="rh-clin-card-header">
+                        <span class="rh-clin-modality">&#x1F4F1; Game Score (Horizontal Twist Wrist)</span>
+                    </div>
+                    <div class="rh-progress-vis">
+                        <div class="rh-prog-bar-wrap">
+                            <div class="rh-prog-label">Session 1</div>
+                            <div class="rh-prog-track"><div class="rh-prog-fill" style="width:66%;"></div></div>
+                            <div class="rh-prog-val">66</div>
+                        </div>
+                        <div class="rh-prog-bar-wrap">
+                            <div class="rh-prog-label">Session 10</div>
+                            <div class="rh-prog-track"><div class="rh-prog-fill rh-prog-end" style="width:78%;"></div></div>
+                            <div class="rh-prog-val rh-prog-end-val">78</div>
+                        </div>
+                    </div>
+                    <div class="rh-clin-delta">+12 points improvement in average game score</div>
+                </div>
+                <div class="rh-clin-card">
+                    <div class="rh-clin-card-header">
+                        <span class="rh-clin-modality">&#x1F9E4; Relative Grip Force (kg)</span>
+                    </div>
+                    <div class="rh-progress-vis">
+                        <div class="rh-prog-bar-wrap">
+                            <div class="rh-prog-label">Session 1</div>
+                            <div class="rh-prog-track"><div class="rh-prog-fill" style="width:40%;"></div></div>
+                            <div class="rh-prog-val">~1.55 kg</div>
+                        </div>
+                        <div class="rh-prog-bar-wrap">
+                            <div class="rh-prog-label">Session 10</div>
+                            <div class="rh-prog-track"><div class="rh-prog-fill rh-prog-end" style="width:63%;"></div></div>
+                            <div class="rh-prog-val rh-prog-end-val">~2.45 kg</div>
+                        </div>
+                    </div>
+                    <div class="rh-clin-delta">~58% increase in measured relative grip force*</div>
+                    <div class="rh-clin-note">* Calculated from approximate reported values; not a published metric.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══ 14. TESTING ═══ -->
+        <section class="rh-section" id="testing">
+            <h2 class="rh-section-title">Testing &amp; Validation</h2>
+            <div class="rh-testing-row">
+                <div class="rh-test-highlight">
+                    <div class="rh-test-pct">100%</div>
+                    <div class="rh-test-lbl">Automated Test Pass Rate</div>
+                    <div class="rh-test-sub">Against production deployment</div>
+                </div>
+                <div class="rh-test-types">
+                    <div class="rh-test-type"><span class="rh-test-dot rh-dot-green"></span><strong>Cypress API Testing</strong><span>REST endpoint validation incl. Predicted MRC Level &amp; Confidence Score</span></div>
+                    <div class="rh-test-type"><span class="rh-test-dot rh-dot-green"></span><strong>Cypress E2E Testing</strong><span>Full user journey validation across mobile and web applications</span></div>
+                    <div class="rh-test-type"><span class="rh-test-dot rh-dot-blue"></span><strong>k6 Performance Testing</strong><span>Load and latency benchmarking against backend microservices</span></div>
+                    <div class="rh-test-type"><span class="rh-test-dot rh-dot-blue"></span><strong>Kafka Pipeline Validation</strong><span>Real-time data pipeline integrity and throughput verification</span></div>
+                    <div class="rh-test-type"><span class="rh-test-dot rh-dot-purple"></span><strong>UAT &amp; Authentication Testing</strong><span>User acceptance testing and security boundary validation</span></div>
+                    <div class="rh-test-type"><span class="rh-test-dot rh-dot-purple"></span><strong>Real-Time Dashboard Testing</strong><span>Clinician interface validation under concurrent patient sessions</span></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══ 16. INNOVATION ═══ -->
+        <section class="rh-section" id="innovation">
+            <h2 class="rh-section-title">Key Research Innovation</h2>
+            <p class="rh-section-sub">The project's primary research contribution is a dual-modality rehabilitation monitoring system &mdash; an explicitly identified innovation in the project report.</p>
+            <div class="rh-innovation-card">
+                <h3>Dual-Modality Rehabilitation Monitoring</h3>
+                <p>Vision-based movement control + sensor-based muscle strength, providing clinicians with two complementary perspectives on patient recovery.</p>
+                <div class="rh-dual-modality">
+                    <div class="rh-modality-side">
+                        <div class="rh-mod-icon">&#x1F4F7;</div>
+                        <strong>Camera</strong>
+                        <p>Movement &amp; Fine Motor Control</p>
+                        <ul><li>Markerless hand tracking</li><li>Joint kinematics</li><li>Exercise scoring</li></ul>
+                    </div>
+                    <div class="rh-modality-plus">+</div>
+                    <div class="rh-modality-side">
+                        <div class="rh-mod-icon">&#x1F9E4;</div>
+                        <strong>Smart Glove</strong>
+                        <p>Relative Muscle Strength</p>
+                        <ul><li>FSR force sensing</li><li>Real-time grip data</li><li>Strength progression</li></ul>
+                    </div>
+                    <div class="rh-modality-result">
+                        <div class="rh-mod-icon">&#x1F4CA;</div>
+                        <strong>Outcome</strong>
+                        <p>More comprehensive patient recovery profile</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══ 6. TECH STACK ═══ -->
+        <section class="rh-section" id="tech-stack">
+            <h2 class="rh-section-title">Technology Stack</h2>
+            <div class="rh-tech-grid">
+                <div class="rh-tech-group">
+                    <div class="rh-tech-group-label">AI / ML</div>
+                    <div class="project-tags"><span>Python</span><span>TensorFlow / Keras</span><span>TensorFlow Lite</span><span>LSTM</span><span>Transfer Learning</span><span>Deep Learning</span></div>
+                </div>
+                <div class="rh-tech-group">
+                    <div class="rh-tech-group-label">Computer Vision</div>
+                    <div class="project-tags"><span>MediaPipe</span><span>Markerless Hand Tracking</span><span>Hand Landmark Detection</span><span>Movement Scoring</span></div>
+                </div>
+                <div class="rh-tech-group">
+                    <div class="rh-tech-group-label">Mobile</div>
+                    <div class="project-tags"><span>Flutter</span><span>Android</span><span>Gamification</span></div>
+                </div>
+                <div class="rh-tech-group">
+                    <div class="rh-tech-group-label">IoT / Embedded</div>
+                    <div class="project-tags"><span>ESP32</span><span>Force Sensitive Resistors</span><span>MQTT</span><span>Wi-Fi</span></div>
+                </div>
+                <div class="rh-tech-group">
+                    <div class="rh-tech-group-label">Backend</div>
+                    <div class="project-tags"><span>Spring Boot</span><span>REST APIs</span><span>PostgreSQL</span><span>Microservices</span><span>Apache Kafka</span></div>
+                </div>
+                <div class="rh-tech-group">
+                    <div class="rh-tech-group-label">Web &amp; Cloud</div>
+                    <div class="project-tags"><span>React</span><span>AWS EC2</span><span>CI/CD</span><span>Interactive Dashboards</span></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══ 15. IMPACT ═══ -->
+        <section class="rh-section" id="impact">
+            <h2 class="rh-section-title">Real-World Impact</h2>
+            <div class="rh-impact-grid">
+                <div class="rh-impact-col">
+                    <div class="rh-impact-header">For Patients</div>
+                    <ul class="rh-impact-list">
+                        <li><span class="rh-impact-icon">&#x1F3AE;</span> More engaging rehabilitation through gamification</li>
+                        <li><span class="rh-impact-icon">&#x1F4F1;</span> Interactive exercises accessible at home</li>
+                        <li><span class="rh-impact-icon">&#x1F4CA;</span> Immediate performance feedback each session</li>
+                        <li><span class="rh-impact-icon">&#x1F9E0;</span> Personalized AI-driven level progression</li>
+                    </ul>
+                </div>
+                <div class="rh-impact-col">
+                    <div class="rh-impact-header">For Clinicians</div>
+                    <ul class="rh-impact-list">
+                        <li><span class="rh-impact-icon">&#x26A1;</span> Real-time patient monitoring remotely</li>
+                        <li><span class="rh-impact-icon">&#x1F4C8;</span> Historical progress tracking and analytics</li>
+                        <li><span class="rh-impact-icon">&#x1F4CF;</span> Objective, quantitative measurements</li>
+                        <li><span class="rh-impact-icon">&#x1F916;</span> AI-assisted level recommendations</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══ 17. SKILLS DEMONSTRATED ═══ -->
+        <section class="rh-section" id="skills-demonstrated">
+            <h2 class="rh-section-title">Skills Demonstrated</h2>
+            <div class="rh-skills-breakdown">
+                <div class="rh-skill-row">
+                    <div class="rh-skill-area"><strong>Computer Vision</strong><span>Markerless hand tracking and landmark-based movement scoring using MediaPipe.</span></div>
+                    <div class="project-tags"><span>MediaPipe</span><span>Hand Tracking</span><span>Scoring Algorithms</span></div>
+                </div>
+                <div class="rh-skill-row">
+                    <div class="rh-skill-area"><strong>Machine Learning</strong><span>Temporal modelling and AI-based rehabilitation level recommendation using LSTM and Transfer Learning.</span></div>
+                    <div class="project-tags"><span>LSTM</span><span>Transfer Learning</span><span>TensorFlow</span><span>TensorFlow Lite</span></div>
+                </div>
+                <div class="rh-skill-row">
+                    <div class="rh-skill-area"><strong>Software Engineering</strong><span>Real-time application integration, automated testing pipeline, and CI/CD deployment.</span></div>
+                    <div class="project-tags"><span>Cypress</span><span>k6</span><span>REST APIs</span><span>CI/CD</span></div>
+                </div>
+                <div class="rh-skill-row">
+                    <div class="rh-skill-area"><strong>Research</strong><span>Literature review, methodology design, experimentation, and clinical evaluation with stroke patients.</span></div>
+                    <div class="project-tags"><span>Clinical Study</span><span>Methodology</span><span>Evaluation</span></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══ AWARDS ═══ -->
+        <section class="rh-section" id="awards">
+            <h2 class="rh-section-title">Awards &amp; Recognition</h2>
+            <div class="rh-awards-list">
+                <div class="rh-award-item">
+                    <div class="rh-award-icon">&#x1F948;</div>
+                    <div><strong>Second Place &mdash; IESL Undergraduate Inventor of the Year (UIY) 2025</strong><p>Institution of Engineers, Sri Lanka &middot; Oct 2025</p></div>
+                </div>
+                <div class="rh-award-item">
+                    <div class="rh-award-icon">&#x1F4C4;</div>
+                    <div><strong>Conference Paper &mdash; 19th ASNAC Annual Congress 2026</strong><p>Sri Lanka Journal of Neurology &middot; Feb 2026 &middot; <a href="https://doi.org/10.4038/sljon.v13i5.218" target="_blank" rel="noopener" class="news-link">DOI: 10.4038/sljon.v13i5.218</a></p></div>
+                </div>
+                <div class="rh-award-item">
+                    <div class="rh-award-icon">&#x1F3C6;</div>
+                    <div><strong>Top 15 Finalist &mdash; Innovate with Ballerina 2025</strong><p>University of Moratuwa IEEE Student Branch &middot; Green-Proxy project &middot; 2025</p></div>
+                </div>
+                <div class="rh-award-item">
+                    <div class="rh-award-icon">&#x1F4CB;</div>
+                    <div><strong>Patent Application Filed</strong><p>Smart-glove integrated hand rehabilitation system &middot; Sri Lanka Patent Office &middot; Jan 2026</p></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══ 18. FUTURE RESEARCH ═══ -->
+        <section class="rh-section rh-future-section" id="future">
+            <h2 class="rh-section-title">Future Research Directions</h2>
+            <p class="rh-section-sub">The project identifies several avenues for future academic investigation, particularly relevant for PhD-level inquiry.</p>
+            <div class="rh-future-grid">
+                <div class="rh-future-item"><span class="rh-future-icon">&#x1F52C;</span><span>Larger, multi-site clinical trials for statistical validation</span></div>
+                <div class="rh-future-item"><span class="rh-future-icon">&#x1F4C8;</span><span>Predictive recovery trajectory modelling from longitudinal data</span></div>
+                <div class="rh-future-item"><span class="rh-future-icon">&#x1F3AF;</span><span>Personalized therapy adjustment using reinforcement learning</span></div>
+                <div class="rh-future-item"><span class="rh-future-icon">&#x1F4E1;</span><span>Interactive telerehabilitation platform integration</span></div>
+                <div class="rh-future-item"><span class="rh-future-icon">&#x1F4AA;</span><span>Extension to full upper-limb and shoulder rehabilitation</span></div>
+                <div class="rh-future-item"><span class="rh-future-icon">&#x1F9E0;</span><span>Cognitive rehabilitation components for neurological co-morbidities</span></div>
+                <div class="rh-future-item"><span class="rh-future-icon">&#x1F9E4;</span><span>Next-generation smart glove with flex sensors for joint-angle analysis</span></div>
+                <div class="rh-future-item"><span class="rh-future-icon">&#x1F91D;</span><span>Multi-institution dataset sharing for federated learning models</span></div>
+            </div>
+        </section>
 
         <div class="project-nav-row">
-            <a href="intelligent-threat-defender" class="project-nav-btn">
-                ← Previous Project
-            </a>
-            <span></span>
+            <a href="intelligent-threat-defender" class="project-nav-btn">&larr; Previous Project</a>
+            <a href="../projects" class="project-nav-btn">All Projects &rarr;</a>
         </div>
 
     </main>
@@ -121,5 +624,4 @@
     </footer>
 
 </body>
-
 </html>
