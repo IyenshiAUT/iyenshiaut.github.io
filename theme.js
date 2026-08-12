@@ -1,7 +1,7 @@
 // Apply saved theme immediately (before render) to avoid flash of wrong theme.
-// Site defaults to light mode. Only switch to dark if the user explicitly chose it.
+// Site defaults to dark (blue) mode. Only switch to light if the user explicitly chose it.
 (function () {
-    if (localStorage.getItem('theme') !== 'dark') {
+    if (localStorage.getItem('theme') === 'light') {
         document.documentElement.classList.add('light-mode');
     }
 })();
