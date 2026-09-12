@@ -61,28 +61,36 @@
                 <!-- ── KPI METRICS DASHBOARD ── -->
                 <section class="detail-section">
                     <h2>Performance Benchmark Dashboard</h2>
-                    <p>Evaluated on 210 standard images from the USC-SIPI dataset across 6,300 total post-attack evaluations.</p>
+                    <p>Select an attack vector to simulate resilience metrics across 6,300 evaluations on the USC-SIPI dataset:</p>
                     
+                    <div class="attack-btn-group" id="attack-filter-group">
+                        <button class="attack-btn active" data-attack="all">All Attacks (Average)</button>
+                        <button class="attack-btn" data-attack="jpeg">JPEG Compression (Q=50)</button>
+                        <button class="attack-btn" data-attack="noise">Gaussian Noise (&sigma;=10)</button>
+                        <button class="attack-btn" data-attack="rotation">Geometric Rotation (10&deg;)</button>
+                        <button class="attack-btn" data-attack="blur">5x5 Image Blur</button>
+                    </div>
+
                     <div class="kpi-grid">
                         <div class="kpi-card">
-                            <div class="kpi-value">39.92 dB</div>
-                            <div class="kpi-label">Peak Unattacked PSNR</div>
-                            <div class="kpi-sub">Exceeds 38 dB Imperceptibility Threshold</div>
+                            <div class="kpi-value" id="kpi-psnr">39.92 dB</div>
+                            <div class="kpi-label">Peak PSNR</div>
+                            <div class="kpi-sub" id="kpi-psnr-sub">Unattacked Baseline (>38 dB threshold)</div>
                         </div>
                         <div class="kpi-card">
-                            <div class="kpi-value">0.9992</div>
+                            <div class="kpi-value" id="kpi-ssim">0.9992</div>
                             <div class="kpi-label">Structural Similarity (SSIM)</div>
-                            <div class="kpi-sub">Near-Identical Visual Perception</div>
+                            <div class="kpi-sub" id="kpi-ssim-sub">Near-Identical Visual Perception</div>
                         </div>
                         <div class="kpi-card">
-                            <div class="kpi-value">0.2746</div>
-                            <div class="kpi-label">Average Bit Error Rate (BER)</div>
-                            <div class="kpi-sub">Outperforms Baseline DWT-SVD (0.4116)</div>
+                            <div class="kpi-value" id="kpi-ber">0.2746</div>
+                            <div class="kpi-label">Bit Error Rate (BER)</div>
+                            <div class="kpi-sub" id="kpi-ber-sub">Outperforms Baseline DWT-SVD (0.4116)</div>
                         </div>
                         <div class="kpi-card">
-                            <div class="kpi-value">45.71%</div>
-                            <div class="kpi-label">JPEG (Q=50) Recovery Rate</div>
-                            <div class="kpi-sub">100% Error-Free Payload Extraction</div>
+                            <div class="kpi-value" id="kpi-mrr">45.71%</div>
+                            <div class="kpi-label">Message Recovery Rate (MRR)</div>
+                            <div class="kpi-sub" id="kpi-mrr-sub">100% Error-Free Payload Extraction</div>
                         </div>
                     </div>
                 </section>
@@ -92,115 +100,123 @@
                     <p><strong>ChromaGuard Pro</strong> is a robust, adaptive, and zero-knowledge blind invisible image watermarking framework designed for content provenance, forensic tracking, and protection against generative AI deepfakes. The framework resolves the classical <em>blindness-robustness paradox</em> and geometric desynchronization by integrating low-frequency 2D Haar DWT sub-band decomposition, Singular Value Decomposition (SVD), Quantization Index Modulation (QIM), dual-layer cryptography, and feature-based pre-alignment.</p>
                 </section>
 
-                <!-- ── 5-PHASE ARCHITECTURE PIPELINE DIAGRAM ── -->
+                <!-- ── INTERACTIVE 5-PHASE ARCHITECTURE EXPLORER ── -->
                 <section class="detail-section">
-                    <h2>System Architecture Pipeline (5 Phases)</h2>
-                    <p>The end-to-end framework comprises five synchronized processing phases:</p>
+                    <h2>Interactive System Architecture Explorer</h2>
+                    <p>Click any pipeline stage below to inspect its mathematical formulation, inputs/outputs, and stego-security role:</p>
 
-                    <div class="pipeline-container">
-
-                        <!-- Phase 1 -->
-                        <div class="pipeline-phase-card">
-                            <div class="phase-header-row">
-                                <h3 class="phase-title">Phase 1: Cryptographic &amp; Visual Preparation</h3>
-                                <span class="phase-number-badge">Phase 01</span>
-                            </div>
-                            <p style="font-size: 0.88rem; margin: 0; color: var(--text-muted);">Payload protection using dual-layer encryption to ensure steganalysis resistance.</p>
-                            <div class="pipeline-flow-steps">
-                                <span class="flow-step-pill">Plaintext Message (M)</span>
-                                <span class="flow-arrow">&rarr;</span>
-                                <span class="flow-step-pill"><strong>AES-256 CBC</strong> + PKCS7 Padding</span>
-                                <span class="flow-arrow">&rarr;</span>
-                                <span class="flow-step-pill">32-bit Header Assembly</span>
-                                <span class="flow-arrow">&rarr;</span>
-                                <span class="flow-step-pill">Text-to-Visual Matrix (I<sub>w</sub>)</span>
-                                <span class="flow-arrow">&rarr;</span>
-                                <span class="flow-step-pill"><strong>Logistic Map Chaos Scrambling</strong> (&mu;=3.99)</span>
-                            </div>
+                    <div class="interactive-diagram-explorer">
+                        <div class="diagram-tabs" id="pipeline-mode-tabs">
+                            <button class="diagram-tab-btn active" data-mode="all">🔄 Complete 5-Phase Pipeline</button>
+                            <button class="diagram-tab-btn" data-mode="embed">🔒 Phases 1–4: Stego-Embedding</button>
+                            <button class="diagram-tab-btn" data-mode="extract">🔓 Phase 5: Zero-Knowledge Extraction</button>
                         </div>
 
-                        <!-- Phase 2 -->
-                        <div class="pipeline-phase-card">
-                            <div class="phase-header-row">
-                                <h3 class="phase-title">Phase 2: Host Image Decomposition</h3>
-                                <span class="phase-number-badge">Phase 02</span>
+                        <div class="pipeline-container" id="pipeline-card-container">
+
+                            <!-- Phase 1 -->
+                            <div class="pipeline-phase-card" data-phase="1">
+                                <div class="phase-header-row">
+                                    <h3 class="phase-title">Phase 1: Cryptographic &amp; Visual Preparation</h3>
+                                    <span class="phase-number-badge">Phase 01</span>
+                                </div>
+                                <p style="font-size: 0.88rem; margin: 0; color: var(--text-muted);">Payload protection using dual-layer encryption to ensure steganalysis resistance.</p>
+                                <div class="pipeline-flow-steps">
+                                    <span class="flow-step-pill interactive-node" data-node="aes"><strong>AES-256 CBC</strong> Encrypt</span>
+                                    <span class="flow-arrow">&rarr;</span>
+                                    <span class="flow-step-pill interactive-node" data-node="header">32-bit Header Assembly</span>
+                                    <span class="flow-arrow">&rarr;</span>
+                                    <span class="flow-step-pill interactive-node" data-node="visual">Text-to-Visual Matrix (I<sub>w</sub>)</span>
+                                    <span class="flow-arrow">&rarr;</span>
+                                    <span class="flow-step-pill interactive-node" data-node="chaos"><strong>Logistic Map Chaos</strong> Scrambling</span>
+                                </div>
                             </div>
-                            <p style="font-size: 0.88rem; margin: 0; color: var(--text-muted);">Frequency-domain isolation and geometric reference anchor generation.</p>
-                            <div class="pipeline-flow-steps">
-                                <span class="flow-step-pill">Cover Image (R, G, B)</span>
-                                <span class="flow-arrow">&rarr;</span>
-                                <span class="flow-step-pill">96x96 Reference Anchor Thumbnail (T)</span>
-                                <span class="flow-arrow">&rarr;</span>
-                                <span class="flow-step-pill"><strong>2D Haar DWT</strong> (C<sub>B</sub>, C<sub>G</sub>, C<sub>R</sub>)</span>
-                                <span class="flow-arrow">&rarr;</span>
-                                <span class="flow-step-pill">Extract <strong>LL Sub-band</strong></span>
-                                <span class="flow-arrow">&rarr;</span>
-                                <span class="flow-step-pill">Partition into n &times; n Non-overlapping Blocks</span>
+
+                            <!-- Phase 2 -->
+                            <div class="pipeline-phase-card" data-phase="2">
+                                <div class="phase-header-row">
+                                    <h3 class="phase-title">Phase 2: Host Image Decomposition</h3>
+                                    <span class="phase-number-badge">Phase 02</span>
+                                </div>
+                                <p style="font-size: 0.88rem; margin: 0; color: var(--text-muted);">Frequency-domain isolation and geometric reference anchor generation.</p>
+                                <div class="pipeline-flow-steps">
+                                    <span class="flow-step-pill interactive-node" data-node="anchor">96x96 Anchor Thumbnail (T)</span>
+                                    <span class="flow-arrow">&rarr;</span>
+                                    <span class="flow-step-pill interactive-node" data-node="dwt"><strong>2D Haar DWT</strong> Sub-band Splitting</span>
+                                    <span class="flow-arrow">&rarr;</span>
+                                    <span class="flow-step-pill interactive-node" data-node="ll">Extract <strong>LL Sub-band</strong></span>
+                                    <span class="flow-arrow">&rarr;</span>
+                                    <span class="flow-step-pill interactive-node" data-node="partition">n &times; n Block Partitioning</span>
+                                </div>
                             </div>
+
+                            <!-- Phase 3 -->
+                            <div class="pipeline-phase-card" data-phase="3">
+                                <div class="phase-header-row">
+                                    <h3 class="phase-title">Phase 3: Adaptive Hybrid Embedding</h3>
+                                    <span class="phase-number-badge">Phase 03</span>
+                                </div>
+                                <p style="font-size: 0.88rem; margin: 0; color: var(--text-muted);">Dual-layer matrix projection combined with scalar quantization.</p>
+                                <div class="pipeline-flow-steps">
+                                    <span class="flow-step-pill interactive-node" data-node="svd">Block SVD Factorization (U &Sigma; V<sup>T</sup>)</span>
+                                    <span class="flow-arrow">&rarr;</span>
+                                    <span class="flow-step-pill interactive-node" data-node="hvs"><strong>Local Variance (&sigma;<sup>2</sup>) HVS Masking</strong></span>
+                                    <span class="flow-arrow">&rarr;</span>
+                                    <span class="flow-step-pill interactive-node" data-node="layer1"><strong>Layer 1:</strong> Structural Fusion</span>
+                                    <span class="flow-arrow">&rarr;</span>
+                                    <span class="flow-step-pill interactive-node" data-node="qim"><strong>Layer 2:</strong> QIM Modulation (s''<sub>1</sub>)</span>
+                                </div>
+                            </div>
+
+                            <!-- Phase 4 -->
+                            <div class="pipeline-phase-card" data-phase="4">
+                                <div class="phase-header-row">
+                                    <h3 class="phase-title">Phase 4: Image Reconstruction</h3>
+                                    <span class="phase-number-badge">Phase 04</span>
+                                </div>
+                                <p style="font-size: 0.88rem; margin: 0; color: var(--text-muted);">Frequency synthesis and color-space clipping protection.</p>
+                                <div class="pipeline-flow-steps">
+                                    <span class="flow-step-pill interactive-node" data-node="isvd">Inverse SVD Synthesis</span>
+                                    <span class="flow-arrow">&rarr;</span>
+                                    <span class="flow-step-pill interactive-node" data-node="idwt">Inverse 2D-DWT Filter Bank</span>
+                                    <span class="flow-arrow">&rarr;</span>
+                                    <span class="flow-step-pill interactive-node" data-node="merge">RGB Channel Merge &amp; Clipping</span>
+                                    <span class="flow-arrow">&rarr;</span>
+                                    <span class="flow-step-pill interactive-node" data-node="stego"><strong>Watermarked Stego Image</strong></span>
+                                </div>
+                            </div>
+
+                            <!-- Phase 5 -->
+                            <div class="pipeline-phase-card" data-phase="5">
+                                <div class="phase-header-row">
+                                    <h3 class="phase-title">Phase 5: Zero-Knowledge Blind Extraction</h3>
+                                    <span class="phase-number-badge">Phase 05</span>
+                                </div>
+                                <p style="font-size: 0.88rem; margin: 0; color: var(--text-muted);">Geometric realigning, parity extraction, and symmetric decryption.</p>
+                                <div class="pipeline-flow-steps">
+                                    <span class="flow-step-pill interactive-node" data-node="orb"><strong>ORB-RANSAC Alignment</strong> (8-DOF H Matrix)</span>
+                                    <span class="flow-arrow">&rarr;</span>
+                                    <span class="flow-step-pill interactive-node" data-node="extdwt">DWT-SVD Sub-band Extraction</span>
+                                    <span class="flow-arrow">&rarr;</span>
+                                    <span class="flow-step-pill interactive-node" data-node="extqim">QIM Parity Extraction</span>
+                                    <span class="flow-arrow">&rarr;</span>
+                                    <span class="flow-step-pill interactive-node" data-node="voting"><strong>9&times; Majority Voting</strong></span>
+                                    <span class="flow-arrow">&rarr;</span>
+                                    <span class="flow-step-pill interactive-node" data-node="decryption">AES-256 CBC Decryption</span>
+                                </div>
+                            </div>
+
                         </div>
 
-                        <!-- Phase 3 -->
-                        <div class="pipeline-phase-card">
-                            <div class="phase-header-row">
-                                <h3 class="phase-title">Phase 3: Adaptive Hybrid Embedding</h3>
-                                <span class="phase-number-badge">Phase 03</span>
+                        <!-- Dynamic Node Inspector Output Card -->
+                        <div class="node-inspector-card" id="node-inspector-card">
+                            <div class="inspector-title-row">
+                                <h4 class="inspector-title" id="inspector-node-title">Module Inspector</h4>
+                                <span class="phase-number-badge" id="inspector-node-badge">Click any module pill above</span>
                             </div>
-                            <p style="font-size: 0.88rem; margin: 0; color: var(--text-muted);">Dual-layer matrix projection combined with scalar quantization.</p>
-                            <div class="pipeline-flow-steps">
-                                <span class="flow-step-pill">Block SVD Factorization</span>
-                                <span class="flow-arrow">&rarr;</span>
-                                <span class="flow-step-pill">Local Variance (&sigma;<sup>2</sup>) HVS Masking (&alpha;<sub>i,j</sub>)</span>
-                                <span class="flow-arrow">&rarr;</span>
-                                <span class="flow-step-pill"><strong>Layer 1:</strong> Structural Matrix Fusion (&Sigma;'<sub>c</sub>)</span>
-                                <span class="flow-arrow">&rarr;</span>
-                                <span class="flow-step-pill"><strong>Layer 2:</strong> QIM Payload Modulation (s''<sub>1</sub>)</span>
-                                <span class="flow-arrow">&rarr;</span>
-                                <span class="flow-step-pill">Inverse SVD Synthesis</span>
-                            </div>
-                        </div>
-
-                        <!-- Phase 4 -->
-                        <div class="pipeline-phase-card">
-                            <div class="phase-header-row">
-                                <h3 class="phase-title">Phase 4: Image Reconstruction</h3>
-                                <span class="phase-number-badge">Phase 04</span>
-                            </div>
-                            <p style="font-size: 0.88rem; margin: 0; color: var(--text-muted);">Frequency synthesis and color-space clipping protection.</p>
-                            <div class="pipeline-flow-steps">
-                                <span class="flow-step-pill">Modified LL' Sub-band</span>
-                                <span class="flow-arrow">&rarr;</span>
-                                <span class="flow-step-pill">Inverse 2D-DWT Filter Bank</span>
-                                <span class="flow-arrow">&rarr;</span>
-                                <span class="flow-step-pill">Channel Merging (C'<sub>B</sub>, C'<sub>G</sub>, C'<sub>R</sub>)</span>
-                                <span class="flow-arrow">&rarr;</span>
-                                <span class="flow-step-pill">8-bit Space Clipping</span>
-                                <span class="flow-arrow">&rarr;</span>
-                                <span class="flow-step-pill"><strong>Watermarked Stego Image</strong></span>
-                            </div>
-                        </div>
-
-                        <!-- Phase 5 -->
-                        <div class="pipeline-phase-card">
-                            <div class="phase-header-row">
-                                <h3 class="phase-title">Phase 5: Zero-Knowledge Blind Extraction</h3>
-                                <span class="phase-number-badge">Phase 05</span>
-                            </div>
-                            <p style="font-size: 0.88rem; margin: 0; color: var(--text-muted);">Geometric realigning, parity extraction, and symmetric decryption.</p>
-                            <div class="pipeline-flow-steps">
-                                <span class="flow-step-pill">Attacked Image (I<sub>attacked</sub>)</span>
-                                <span class="flow-arrow">&rarr;</span>
-                                <span class="flow-step-pill"><strong>ORB-RANSAC Feature Alignment</strong> (8-DOF Homography)</span>
-                                <span class="flow-arrow">&rarr;</span>
-                                <span class="flow-step-pill">DWT-SVD Sub-band Extraction</span>
-                                <span class="flow-arrow">&rarr;</span>
-                                <span class="flow-step-pill">QIM Parity Bit Extraction</span>
-                                <span class="flow-arrow">&rarr;</span>
-                                <span class="flow-step-pill"><strong>9&times; Majority Voting</strong></span>
-                                <span class="flow-arrow">&rarr;</span>
-                                <span class="flow-step-pill">AES-256 Decryption</span>
-                                <span class="flow-arrow">&rarr;</span>
-                                <span class="flow-step-pill"><strong>Recovered Message (M)</strong></span>
-                            </div>
+                            <div class="formula-box" id="inspector-node-formula">C_i = E_AES(P_i ⊕ C_{i-1}, K_AES)</div>
+                            <p style="font-size: 0.88rem; color: var(--text-color); margin: 0.5rem 0;" id="inspector-node-desc">Click any node in the architecture pipeline above to inspect its exact mathematical formulation, inputs, outputs, and security guarantees.</p>
+                            <div style="font-size: 0.8rem; color: var(--text-muted);" id="inspector-node-details"><strong>Inputs:</strong> Plaintext Message M, 256-bit Symmetric Key K<sub>AES</sub>, IV.<br><strong>Outputs:</strong> 128-bit Ciphertext blocks C<sub>i</sub> with PKCS7 padding.</div>
                         </div>
 
                     </div>
@@ -215,37 +231,37 @@
                         <div class="comp-row">
                             <div class="comp-label">Proposed Method</div>
                             <div class="comp-bar-bg">
-                                <div class="comp-bar-fill highlight" style="width: 27.4%;"></div>
+                                <div class="comp-bar-fill highlight" id="bar-proposed" style="width: 27.4%;"></div>
                             </div>
-                            <div class="comp-value">0.2746</div>
+                            <div class="comp-value" id="val-proposed">0.2746</div>
                         </div>
                         <div class="comp-row">
                             <div class="comp-label">DWT-SVD</div>
                             <div class="comp-bar-bg">
-                                <div class="comp-bar-fill" style="width: 41.1%;"></div>
+                                <div class="comp-bar-fill" id="bar-dwtsvd" style="width: 41.1%;"></div>
                             </div>
-                            <div class="comp-value">0.4116</div>
+                            <div class="comp-value" id="val-dwtsvd">0.4116</div>
                         </div>
                         <div class="comp-row">
                             <div class="comp-label">LSB</div>
                             <div class="comp-bar-bg">
-                                <div class="comp-bar-fill" style="width: 38.0%;"></div>
+                                <div class="comp-bar-fill" id="bar-lsb" style="width: 38.0%;"></div>
                             </div>
-                            <div class="comp-value">0.3807</div>
+                            <div class="comp-value" id="val-lsb">0.3807</div>
                         </div>
                         <div class="comp-row">
                             <div class="comp-label">QIM (Standalone)</div>
                             <div class="comp-bar-bg">
-                                <div class="comp-bar-fill" style="width: 36.3%;"></div>
+                                <div class="comp-bar-fill" id="bar-qim" style="width: 36.3%;"></div>
                             </div>
-                            <div class="comp-value">0.3639</div>
+                            <div class="comp-value" id="val-qim">0.3639</div>
                         </div>
                         <div class="comp-row">
                             <div class="comp-label">DCT</div>
                             <div class="comp-bar-bg">
-                                <div class="comp-bar-fill" style="width: 33.6%;"></div>
+                                <div class="comp-bar-fill" id="bar-dct" style="width: 33.6%;"></div>
                             </div>
-                            <div class="comp-value">0.3365</div>
+                            <div class="comp-value" id="val-dct">0.3365</div>
                         </div>
                     </div>
                 </section>
@@ -274,6 +290,206 @@
     <footer>
         <p>&copy; 2026 Taneesha Iyenshi &mdash; University of Ruhuna, Sri Lanka</p>
     </footer>
+
+    <!-- ── INTERACTIVE DIAGRAM & BENCHMARK CONTROLLER SCRIPT ── -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // 1. Module Node Knowledge Base (Formulas & Explanations)
+            const nodeData = {
+                aes: {
+                    title: "AES-256 CBC Payload Encryption",
+                    badge: "Security Layer",
+                    formula: "C_i = E_AES(P_i ⊕ C_{i-1}, K_AES)  for i ≥ 1",
+                    desc: "Encrypts the payload using AES-256 in Cipher Block Chaining (CBC) mode with PKCS7 padding, guaranteeing high information-theoretic security against content decryption.",
+                    details: "<strong>Inputs:</strong> Plaintext Message M, 256-bit symmetric key K_AES, 128-bit IV.<br><strong>Outputs:</strong> AES Ciphertext blocks C_i."
+                },
+                header: {
+                    title: "32-Bit Unsigned Bitstream Header",
+                    badge: "Protocol Layer",
+                    formula: "V_b = bits(H) || bits(C)",
+                    desc: "Prepends a 32-bit unsigned integer length header H to enable autonomous payload size detection during zero-knowledge extraction.",
+                    details: "<strong>Purpose:</strong> Prevents buffer overflow and ensures exact byte extraction bounds without requiring cover image metadata."
+                },
+                visual: {
+                    title: "Text-to-Visual Matrix Transformation",
+                    badge: "Spatial Layer",
+                    formula: "I_w(x, y) = F_render(C_seg) ∈ {0, 255}",
+                    desc: "Renders textual ciphertext bytes into a 2D binary spatial luminance matrix (M_w × N_w) to disperse structural textual dependencies into spatial pixel domain.",
+                    details: "<strong>Mapping:</strong> Text pixels set to maximal luminance (255) and background to minimal luminance (0)."
+                },
+                chaos: {
+                    title: "1D Logistic Map Chaotic Scrambling",
+                    badge: "Stego-Security",
+                    formula: "x_{n+1} = μ · x_n(1 - x_n),  μ = 3.99, x_0 ∈ (0,1)",
+                    desc: "Generates a non-linear chaotic permutation map P to scramble I_w into a white-noise-like structural matrix W_S, thwarting spatial steganalysis attacks.",
+                    details: "<strong>Key Sensitivity:</strong> Extreme sensitivity to initial state x_0 with positive Lyapunov exponent (λ > 0)."
+                },
+                anchor: {
+                    title: "96x96 Geometric Reference Thumbnail Anchor",
+                    badge: "Geometric Layer",
+                    formula: "T = Bicubic_Interpolate(I_cover, 96, 96)",
+                    desc: "Extracts an invariant low-resolution grayscale thumbnail T to serve as a spatial anchor for affine transform reversal during extraction.",
+                    details: "<strong>Role:</strong> Enables 8-DOF Homography matrix computation via ORB-RANSAC."
+                },
+                dwt: {
+                    title: "2D Haar Discrete Wavelet Transform (DWT)",
+                    badge: "Frequency Isolation",
+                    formula: "LL(x, y) = ∑∑ h_0(i)h_0(j)C_k(2x - i, 2y - j)",
+                    desc: "Decomposes RGB channels into multi-resolution frequency sub-bands (LL, LH, HL, HH). Isolates low-frequency energy in LL band to withstand lossy JPEG compression.",
+                    details: "<strong>Resilience:</strong> Low-frequency approximation band insulates watermark payload against high-frequency quantization loss."
+                },
+                ll: {
+                    title: "LL Approximation Sub-band Isolation",
+                    badge: "Frequency Layer",
+                    formula: "B_{i,j} = LL_k[i·n : (i+1)n, j·n : (j+1)n]",
+                    desc: "Partitions the LL sub-band into non-overlapping n × n pixel blocks B_{i,j} for block-level SVD factor decomposition.",
+                    details: "<strong>Block Size:</strong> n × n grid partitioning for localized HVS texture masking."
+                },
+                svd: {
+                    title: "Singular Value Decomposition (SVD)",
+                    badge: "Algebraic Stability",
+                    formula: "B_{i,j} = U_c · Σ_c · V_c^T",
+                    desc: "Decomposes each cover block into orthogonal basis matrices (U_c, V_c) and singular values Σ_c. The primary singular value s_1 dominates luminance stability.",
+                    details: "<strong>Algebraic Norm:</strong> ||B||_F = √(∑ s_i^2). Primary singular value s_1 governs imperceptibility."
+                },
+                hvs: {
+                    title: "Block-Variance (σ²) HVS Dynamic Masking",
+                    badge: "Imperceptibility",
+                    formula: "α_{i,j} = α_{min} + v_{norm}(α_{max} - α_{min})",
+                    desc: "Calculates local block variance σ^2 to compute a Human Visual System dynamic scaling factor α_{i,j}, confining modifications strictly to high-texture blocks.",
+                    details: "<strong>Visual Quality:</strong> Achieves unattacked PSNR of 39.92 dB and SSIM of 0.9992."
+                },
+                layer1: {
+                    title: "Layer 1: Structural Matrix Fusion",
+                    badge: "Embedding Layer 1",
+                    formula: "Σ'_c = Σ_c + α_{i,j} · Σ_w",
+                    desc: "Linearly projects scaled singular values of the chaotic watermark matrix Σ_w onto the cover block's singular matrix Σ_c.",
+                    details: "<strong>Stability:</strong> Bounds chaotic structural geometry into the algebraic core of the cover image block."
+                },
+                qim: {
+                    title: "Layer 2: QIM Payload Bit Modulation",
+                    badge: "Embedding Layer 2",
+                    formula: "q = ⌊ (s'_1 / Δ) + 0.5 ⌋,  s''_1 adjusted for parity q mod 2 = b_m",
+                    desc: "Applies Quantization Index Modulation (QIM) with quantization step size Δ to modulate the primary singular value s'_1 for single bit payload embedding.",
+                    details: "<strong>Zero-Knowledge:</strong> Parity constraint enables blind bit recovery without original cover image."
+                },
+                isvd: {
+                    title: "Inverse SVD Matrix Synthesis",
+                    badge: "Reconstruction",
+                    formula: "B'_{i,j} = U_c · Σ''_c · V_c^T",
+                    desc: "Reconstructs spatial blocks B'_{i,j} from modified singular value matrix Σ''_c and original orthogonal basis vectors.",
+                    details: "<strong>Output:</strong> Synthesized low-frequency sub-band block."
+                },
+                idwt: {
+                    title: "Inverse 2D Haar DWT Filter Bank",
+                    badge: "Reconstruction",
+                    formula: "C'_{float} = IDWT_2(LL'_k, HL_k, LH_k, HH_k)",
+                    desc: "Combines modified LL' sub-band with unmodified high-frequency bands (HL, LH, HH) via inverse wavelet synthesis bank.",
+                    details: "<strong>Channel Recovery:</strong> Reconstructs floating-point RGB spatial color planes."
+                },
+                orb: {
+                    title: "ORB-RANSAC Feature Homography Alignment",
+                    badge: "Geometric Synchronization",
+                    formula: "[x_A, y_A, 1]^T = H_{small} · [x_T, y_T, 1]^T",
+                    desc: "Extracts FAST corners & BRIEF descriptors from attacked image I_attacked, matching against anchor T using RANSAC to compute 8-DOF Homography matrix H.",
+                    details: "<strong>Rotation Recovery:</strong> Reverses 10° spatial rotation and affine attacks prior to bit extraction (BER 0.4107)."
+                },
+                voting: {
+                    title: "Probabilistic 9x Multi-Channel Majority Voting",
+                    badge: "Fault Tolerance",
+                    formula: "B_{out}[z] = 1 if ∑ v_z^{(c,r)} > (3R/2) else 0",
+                    desc: "Distributes each payload bit redundantly 3 times across all 3 color channels (9× voting). Filters out impulse noise and localized quantization errors.",
+                    details: "<strong>Resilience:</strong> Boosts JPEG (Q=50) Message Recovery Rate to 45.71%."
+                }
+            };
+
+            // 2. Node Click Event Listeners
+            const nodeElements = document.querySelectorAll('.interactive-node');
+            const inspectorCard = document.getElementById('node-inspector-card');
+            const titleElem = document.getElementById('inspector-node-title');
+            const badgeElem = document.getElementById('inspector-node-badge');
+            const formulaElem = document.getElementById('inspector-node-formula');
+            const descElem = document.getElementById('inspector-node-desc');
+            const detailsElem = document.getElementById('inspector-node-details');
+
+            nodeElements.forEach(node => {
+                node.addEventListener('click', () => {
+                    nodeElements.forEach(n => n.classList.remove('active-node'));
+                    node.classList.add('active-node');
+                    const key = node.getAttribute('data-node');
+                    const info = nodeData[key];
+                    if (info) {
+                        titleElem.textContent = info.title;
+                        badgeElem.textContent = info.badge;
+                        formulaElem.textContent = info.formula;
+                        descElem.textContent = info.desc;
+                        detailsElem.innerHTML = info.details;
+                        inspectorCard.classList.add('active');
+                    }
+                });
+            });
+
+            // 3. Pipeline Mode Switcher Tabs
+            const tabBtns = document.querySelectorAll('#pipeline-mode-tabs .diagram-tab-btn');
+            const phaseCards = document.querySelectorAll('.pipeline-phase-card');
+
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    tabBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    const mode = btn.getAttribute('data-mode');
+
+                    phaseCards.forEach(card => {
+                        const phaseNum = parseInt(card.getAttribute('data-phase'));
+                        if (mode === 'all') {
+                            card.style.display = 'block';
+                            card.classList.remove('highlighted-phase');
+                        } else if (mode === 'embed') {
+                            card.style.display = (phaseNum <= 4) ? 'block' : 'none';
+                            card.classList.toggle('highlighted-phase', phaseNum === 3);
+                        } else if (mode === 'extract') {
+                            card.style.display = (phaseNum === 5) ? 'block' : 'none';
+                            card.classList.toggle('highlighted-phase', phaseNum === 5);
+                        }
+                    });
+                });
+            });
+
+            // 4. Attack Filter Buttons & Live Dashboard Update
+            const attackBtns = document.querySelectorAll('#attack-filter-group .attack-btn');
+            const attackMetrics = {
+                all: { psnr: '39.92 dB', psnrSub: 'Unattacked Baseline (>38 dB)', ssim: '0.9992', ber: '0.2746', mrr: '45.71%', phase: 0 },
+                jpeg: { psnr: '33.09 dB', psnrSub: 'JPEG Q=50 Post-Attack', ssim: '0.7403', ber: '0.2230', mrr: '45.71%', phase: 3 },
+                noise: { psnr: '32.15 dB', psnrSub: 'Gaussian Noise σ=10', ssim: '0.7120', ber: '0.2582', mrr: '37.14%', phase: 3 },
+                rotation: { psnr: '31.80 dB', psnrSub: '10° Geometric Rotation', ssim: '0.6950', ber: '0.4107', mrr: '28.50%', phase: 5 },
+                blur: { psnr: '34.50 dB', psnrSub: '5x5 Spatial Blur', ssim: '0.7850', ber: '0.2914', mrr: '42.00%', phase: 2 }
+            };
+
+            attackBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    attackBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    const attackKey = btn.getAttribute('data-attack');
+                    const data = attackMetrics[attackKey];
+                    if (data) {
+                        document.getElementById('kpi-psnr').textContent = data.psnr;
+                        document.getElementById('kpi-psnr-sub').textContent = data.psnrSub;
+                        document.getElementById('kpi-ssim').textContent = data.ssim;
+                        document.getElementById('kpi-ber').textContent = data.ber;
+                        document.getElementById('kpi-mrr').textContent = data.mrr;
+
+                        // Highlight responsible phase card
+                        phaseCards.forEach(card => {
+                            const p = parseInt(card.getAttribute('data-phase'));
+                            card.classList.toggle('highlighted-phase', p === data.phase);
+                        });
+                    }
+                });
+            });
+
+        });
+    </script>
 
 </body>
 

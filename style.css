@@ -1106,6 +1106,11 @@ html.light-mode .photo-glow {
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
 }
 
+.pipeline-phase-card.highlighted-phase {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.25);
+}
+
 .phase-header-row {
     display: flex;
     align-items: center;
@@ -1257,4 +1262,133 @@ html.light-mode .photo-glow {
     color: var(--text-muted);
     text-align: right;
     flex-shrink: 0;
+}
+
+/* ─── Interactive Diagram Explorer & Inspector ─── */
+.interactive-diagram-explorer {
+    background: var(--card-bg, rgba(255, 255, 255, 0.02));
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+}
+
+.diagram-tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.75rem;
+    overflow-x: auto;
+}
+
+.diagram-tab-btn {
+    background: transparent;
+    border: 1px solid transparent;
+    color: var(--text-muted);
+    font-size: 0.84rem;
+    font-weight: 600;
+    padding: 0.45rem 0.9rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.diagram-tab-btn:hover {
+    color: var(--text-color);
+    background: var(--nav-hover-bg);
+}
+
+.diagram-tab-btn.active {
+    background: var(--accent-bg-medium);
+    color: var(--accent-color);
+    border-color: var(--accent-border);
+}
+
+.flow-step-pill.interactive-node {
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.flow-step-pill.interactive-node:hover {
+    border-color: var(--accent-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.flow-step-pill.interactive-node.active-node {
+    background: var(--accent-bg-medium);
+    border-color: var(--accent-color);
+    color: var(--accent-color);
+    box-shadow: 0 0 12px var(--accent-border);
+}
+
+.node-inspector-card {
+    background: var(--bg-secondary, rgba(255, 255, 255, 0.04));
+    border: 1px solid var(--accent-border);
+    border-radius: 10px;
+    padding: 1.25rem 1.5rem;
+    margin-top: 1.25rem;
+    display: none;
+    animation: fadeIn 0.3s ease;
+}
+
+.node-inspector-card.active {
+    display: block;
+}
+
+.inspector-title-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.75rem;
+}
+
+.inspector-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--accent-color);
+    margin: 0;
+}
+
+.formula-box {
+    background: rgba(0, 0, 0, 0.25);
+    border-left: 3px solid var(--accent-color);
+    padding: 0.6rem 0.9rem;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.88rem;
+    color: #38bdf8;
+    margin: 0.6rem 0;
+    border-radius: 0 6px 6px 0;
+}
+
+.attack-btn-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.attack-btn {
+    background: var(--bg-secondary, rgba(255, 255, 255, 0.05));
+    border: 1px solid var(--border-color);
+    color: var(--text-muted);
+    font-size: 0.78rem;
+    font-weight: 600;
+    padding: 0.35rem 0.75rem;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.attack-btn:hover, .attack-btn.active {
+    background: var(--accent-bg-medium);
+    color: var(--accent-color);
+    border-color: var(--accent-border);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
 }
