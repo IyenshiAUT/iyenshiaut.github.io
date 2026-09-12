@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Digital Watermarking Protocol — Taneesha Iyenshi</title>
+    <title>ChromaGuard Pro: Robust & Adaptive Blind Image Watermarking — Taneesha Iyenshi</title>
     <meta name="description"
-        content="DWT-SVD hybrid watermarking system with chaotic encryption for robust invisible media authentication.">
+        content="ChromaGuard Pro — A robust, adaptive, and blind image watermarking framework integrating DWT-SVD, QIM, AES-256 encryption, and ORB-RANSAC geometric alignment.">
     <link rel="icon" type="image/jpeg" href="../../img/Profile.jpeg">
     <link rel="stylesheet" href="../../style.css">
     <script src="../../theme.js"></script>
@@ -47,12 +47,12 @@
 
             <header class="project-detail-header">
                 <div class="project-detail-meta">
-                    <span class="project-year">2024</span>
-                    <span class="project-status status-completed">Completed</span>
+                    <span class="project-year">2026</span>
+                    <span class="project-status status-completed">Completed &amp; Submitted to ICAC 2026</span>
                 </div>
-                <h1 class="project-detail-title">Digital Watermarking Protocol</h1>
+                <h1 class="project-detail-title">ChromaGuard Pro: Robust &amp; Adaptive Blind Image Watermarking Framework</h1>
                 <div class="project-tags large-tags">
-                    <span>Python</span><span>Cryptography</span><span>DWT-SVD</span><span>Signal Processing</span>
+                    <span>Python</span><span>DWT-SVD</span><span>QIM</span><span>AES-256 Encryption</span><span>Chaotic Scrambling</span><span>ORB-RANSAC</span><span>Signal Processing</span>
                 </div>
             </header>
 
@@ -60,46 +60,34 @@
 
                 <section class="detail-section">
                     <h2>Overview</h2>
-                    <p>This project presents a hybrid digital watermarking protocol that combines the robustness of
-                        frequency-domain transforms with the unpredictability of chaotic encryption to achieve
-                        imperceptible yet highly resilient media authentication. The system targets a core challenge in
-                        digital forensics: embedding an ownership signature into multimedia content without degrading
-                        its perceptual quality.</p>
+                    <p><strong>ChromaGuard Pro</strong> is a robust, adaptive, and zero-knowledge blind invisible image watermarking framework designed for content provenance, forensic tracking, and protection against generative AI deepfakes. The framework resolves the classical <em>blindness-robustness paradox</em> and geometric desynchronization by integrating low-frequency 2D Haar DWT sub-band decomposition, Singular Value Decomposition (SVD), Quantization Index Modulation (QIM), dual-layer cryptography, and feature-based pre-alignment.</p>
                 </section>
 
                 <section class="detail-section">
-                    <h2>Methodology</h2>
-                    <p>The approach integrates two well-established signal processing techniques:</p>
+                    <h2>Core Methodology &amp; Architecture</h2>
                     <ul class="detail-list">
-                        <li><strong>Discrete Wavelet Transform (DWT)</strong> — decomposes the host image into
-                            frequency sub-bands, allowing the watermark to be embedded in perceptually significant
-                            regions.</li>
-                        <li><strong>Singular Value Decomposition (SVD)</strong> — applied to the selected sub-band
-                            coefficients, modifying singular values to encode the watermark in a mathematically stable
-                            manner.</li>
-                        <li><strong>Chaotic Encryption (Logistic Map)</strong> — the watermark itself is scrambled
-                            using a logistic map-based pseudo-random key generator before embedding, dramatically
-                            increasing resilience against extraction attempts.</li>
+                        <li><strong>Block-Variance Adaptive DWT-SVD &amp; QIM Embedding:</strong> Computes a local block variance (&sigma;<sup>2</sup>) Human Visual System (HVS) masking factor to dynamically confine watermark embedding to high-texture blocks, achieving an unattacked PSNR of 39.92 dB and SSIM of 0.9992. Singular values of the DWT LL sub-band are modulated via QIM with 9&times; multi-channel majority voting redundancy.</li>
+                        <li><strong>Dual-Layer Cryptographic Security:</strong> Payload bits are encrypted using AES-256 in Cipher Block Chaining (CBC) mode with PKCS7 padding, followed by 1D Logistic Map chaotic scrambling (&mu; = 3.99) to eliminate structural spatial correlations and thwart spatial steganalysis.</li>
+                        <li><strong>ORB-RANSAC Feature Pre-Alignment:</strong> Utilizes Oriented FAST and Rotated BRIEF (ORB) feature matching with Random Sample Consensus (RANSAC) to estimate an 8-DOF homography matrix (H) against a geometric anchor thumbnail, restoring grid alignment and defeating rotational (10&deg;) and spatial scaling attacks prior to extraction.</li>
+                        <li><strong>Zero-Knowledge Blind Extraction:</strong> Payload extraction relies purely on quantization parity and symmetric key decryption without requiring access to the original cover image.</li>
                     </ul>
                 </section>
 
                 <section class="detail-section">
-                    <h2>Key Contributions</h2>
+                    <h2>Key Contributions &amp; Experimental Results</h2>
                     <ul class="detail-list">
-                        <li>Demonstrated high imperceptibility (PSNR &gt; 40 dB) while maintaining robust
-                            extractability after JPEG compression, cropping, and noise attacks.</li>
-                        <li>Chaotic encryption layer significantly increases security against blind watermark
-                            extraction.</li>
-                        <li>Implemented a complete Python-based pipeline for embedding and blind extraction without
-                            access to the original host image.</li>
+                        <li><strong>Extensive Benchmark:</strong> Evaluated across 210 standard images from the USC-SIPI database (6,300 total evaluations across 5 attack conditions), significantly outperforming baseline DCT, DWT, DWT-SVD, LSB, and standalone QIM schemes.</li>
+                        <li><strong>High Visual Quality:</strong> Maintained an unattacked peak PSNR of 39.92 dB and post-attack average PSNR of 33.09 dB with an average SSIM of 0.7403.</li>
+                        <li><strong>Robust Attack Resilience:</strong> Achieved low Bit Error Rates (BER) under heavy JPEG compression (Q = 50, BER = 0.2230), Gaussian noise (&sigma; = 10, BER = 0.2582), 5&times;5 blur (BER = 0.2914), and 10&deg; geometric rotation (BER = 0.4107).</li>
+                        <li><strong>High Message Recovery Rate (MRR):</strong> Reached 45.71% 100% error-free payload string recovery under lossy JPEG (Q = 50) and 37.14% under Gaussian noise via 9&times; majority voting.</li>
                     </ul>
                 </section>
 
                 <section class="detail-section">
-                    <h2>Technologies Used</h2>
+                    <h2>Technologies &amp; Libraries</h2>
                     <div class="project-tags large-tags">
                         <span>Python</span><span>NumPy</span><span>PyWavelets</span><span>OpenCV</span>
-                        <span>Cryptography</span><span>DWT-SVD</span>
+                        <span>AES-256 (CBC)</span><span>DWT-SVD</span><span>QIM</span><span>ORB-RANSAC</span><span>USC-SIPI Dataset</span>
                     </div>
                 </section>
 
