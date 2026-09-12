@@ -58,29 +58,196 @@
 
             <div class="project-detail-body">
 
+                <!-- ── KPI METRICS DASHBOARD ── -->
+                <section class="detail-section">
+                    <h2>Performance Benchmark Dashboard</h2>
+                    <p>Evaluated on 210 standard images from the USC-SIPI dataset across 6,300 total post-attack evaluations.</p>
+                    
+                    <div class="kpi-grid">
+                        <div class="kpi-card">
+                            <div class="kpi-value">39.92 dB</div>
+                            <div class="kpi-label">Peak Unattacked PSNR</div>
+                            <div class="kpi-sub">Exceeds 38 dB Imperceptibility Threshold</div>
+                        </div>
+                        <div class="kpi-card">
+                            <div class="kpi-value">0.9992</div>
+                            <div class="kpi-label">Structural Similarity (SSIM)</div>
+                            <div class="kpi-sub">Near-Identical Visual Perception</div>
+                        </div>
+                        <div class="kpi-card">
+                            <div class="kpi-value">0.2746</div>
+                            <div class="kpi-label">Average Bit Error Rate (BER)</div>
+                            <div class="kpi-sub">Outperforms Baseline DWT-SVD (0.4116)</div>
+                        </div>
+                        <div class="kpi-card">
+                            <div class="kpi-value">45.71%</div>
+                            <div class="kpi-label">JPEG (Q=50) Recovery Rate</div>
+                            <div class="kpi-sub">100% Error-Free Payload Extraction</div>
+                        </div>
+                    </div>
+                </section>
+
                 <section class="detail-section">
                     <h2>Overview</h2>
                     <p><strong>ChromaGuard Pro</strong> is a robust, adaptive, and zero-knowledge blind invisible image watermarking framework designed for content provenance, forensic tracking, and protection against generative AI deepfakes. The framework resolves the classical <em>blindness-robustness paradox</em> and geometric desynchronization by integrating low-frequency 2D Haar DWT sub-band decomposition, Singular Value Decomposition (SVD), Quantization Index Modulation (QIM), dual-layer cryptography, and feature-based pre-alignment.</p>
                 </section>
 
+                <!-- ── 5-PHASE ARCHITECTURE PIPELINE DIAGRAM ── -->
                 <section class="detail-section">
-                    <h2>Core Methodology &amp; Architecture</h2>
-                    <ul class="detail-list">
-                        <li><strong>Block-Variance Adaptive DWT-SVD &amp; QIM Embedding:</strong> Computes a local block variance (&sigma;<sup>2</sup>) Human Visual System (HVS) masking factor to dynamically confine watermark embedding to high-texture blocks, achieving an unattacked PSNR of 39.92 dB and SSIM of 0.9992. Singular values of the DWT LL sub-band are modulated via QIM with 9&times; multi-channel majority voting redundancy.</li>
-                        <li><strong>Dual-Layer Cryptographic Security:</strong> Payload bits are encrypted using AES-256 in Cipher Block Chaining (CBC) mode with PKCS7 padding, followed by 1D Logistic Map chaotic scrambling (&mu; = 3.99) to eliminate structural spatial correlations and thwart spatial steganalysis.</li>
-                        <li><strong>ORB-RANSAC Feature Pre-Alignment:</strong> Utilizes Oriented FAST and Rotated BRIEF (ORB) feature matching with Random Sample Consensus (RANSAC) to estimate an 8-DOF homography matrix (H) against a geometric anchor thumbnail, restoring grid alignment and defeating rotational (10&deg;) and spatial scaling attacks prior to extraction.</li>
-                        <li><strong>Zero-Knowledge Blind Extraction:</strong> Payload extraction relies purely on quantization parity and symmetric key decryption without requiring access to the original cover image.</li>
-                    </ul>
+                    <h2>System Architecture Pipeline (5 Phases)</h2>
+                    <p>The end-to-end framework comprises five synchronized processing phases:</p>
+
+                    <div class="pipeline-container">
+
+                        <!-- Phase 1 -->
+                        <div class="pipeline-phase-card">
+                            <div class="phase-header-row">
+                                <h3 class="phase-title">Phase 1: Cryptographic &amp; Visual Preparation</h3>
+                                <span class="phase-number-badge">Phase 01</span>
+                            </div>
+                            <p style="font-size: 0.88rem; margin: 0; color: var(--text-muted);">Payload protection using dual-layer encryption to ensure steganalysis resistance.</p>
+                            <div class="pipeline-flow-steps">
+                                <span class="flow-step-pill">Plaintext Message (M)</span>
+                                <span class="flow-arrow">&rarr;</span>
+                                <span class="flow-step-pill"><strong>AES-256 CBC</strong> + PKCS7 Padding</span>
+                                <span class="flow-arrow">&rarr;</span>
+                                <span class="flow-step-pill">32-bit Header Assembly</span>
+                                <span class="flow-arrow">&rarr;</span>
+                                <span class="flow-step-pill">Text-to-Visual Matrix (I<sub>w</sub>)</span>
+                                <span class="flow-arrow">&rarr;</span>
+                                <span class="flow-step-pill"><strong>Logistic Map Chaos Scrambling</strong> (&mu;=3.99)</span>
+                            </div>
+                        </div>
+
+                        <!-- Phase 2 -->
+                        <div class="pipeline-phase-card">
+                            <div class="phase-header-row">
+                                <h3 class="phase-title">Phase 2: Host Image Decomposition</h3>
+                                <span class="phase-number-badge">Phase 02</span>
+                            </div>
+                            <p style="font-size: 0.88rem; margin: 0; color: var(--text-muted);">Frequency-domain isolation and geometric reference anchor generation.</p>
+                            <div class="pipeline-flow-steps">
+                                <span class="flow-step-pill">Cover Image (R, G, B)</span>
+                                <span class="flow-arrow">&rarr;</span>
+                                <span class="flow-step-pill">96x96 Reference Anchor Thumbnail (T)</span>
+                                <span class="flow-arrow">&rarr;</span>
+                                <span class="flow-step-pill"><strong>2D Haar DWT</strong> (C<sub>B</sub>, C<sub>G</sub>, C<sub>R</sub>)</span>
+                                <span class="flow-arrow">&rarr;</span>
+                                <span class="flow-step-pill">Extract <strong>LL Sub-band</strong></span>
+                                <span class="flow-arrow">&rarr;</span>
+                                <span class="flow-step-pill">Partition into n &times; n Non-overlapping Blocks</span>
+                            </div>
+                        </div>
+
+                        <!-- Phase 3 -->
+                        <div class="pipeline-phase-card">
+                            <div class="phase-header-row">
+                                <h3 class="phase-title">Phase 3: Adaptive Hybrid Embedding</h3>
+                                <span class="phase-number-badge">Phase 03</span>
+                            </div>
+                            <p style="font-size: 0.88rem; margin: 0; color: var(--text-muted);">Dual-layer matrix projection combined with scalar quantization.</p>
+                            <div class="pipeline-flow-steps">
+                                <span class="flow-step-pill">Block SVD Factorization</span>
+                                <span class="flow-arrow">&rarr;</span>
+                                <span class="flow-step-pill">Local Variance (&sigma;<sup>2</sup>) HVS Masking (&alpha;<sub>i,j</sub>)</span>
+                                <span class="flow-arrow">&rarr;</span>
+                                <span class="flow-step-pill"><strong>Layer 1:</strong> Structural Matrix Fusion (&Sigma;'<sub>c</sub>)</span>
+                                <span class="flow-arrow">&rarr;</span>
+                                <span class="flow-step-pill"><strong>Layer 2:</strong> QIM Payload Modulation (s''<sub>1</sub>)</span>
+                                <span class="flow-arrow">&rarr;</span>
+                                <span class="flow-step-pill">Inverse SVD Synthesis</span>
+                            </div>
+                        </div>
+
+                        <!-- Phase 4 -->
+                        <div class="pipeline-phase-card">
+                            <div class="phase-header-row">
+                                <h3 class="phase-title">Phase 4: Image Reconstruction</h3>
+                                <span class="phase-number-badge">Phase 04</span>
+                            </div>
+                            <p style="font-size: 0.88rem; margin: 0; color: var(--text-muted);">Frequency synthesis and color-space clipping protection.</p>
+                            <div class="pipeline-flow-steps">
+                                <span class="flow-step-pill">Modified LL' Sub-band</span>
+                                <span class="flow-arrow">&rarr;</span>
+                                <span class="flow-step-pill">Inverse 2D-DWT Filter Bank</span>
+                                <span class="flow-arrow">&rarr;</span>
+                                <span class="flow-step-pill">Channel Merging (C'<sub>B</sub>, C'<sub>G</sub>, C'<sub>R</sub>)</span>
+                                <span class="flow-arrow">&rarr;</span>
+                                <span class="flow-step-pill">8-bit Space Clipping</span>
+                                <span class="flow-arrow">&rarr;</span>
+                                <span class="flow-step-pill"><strong>Watermarked Stego Image</strong></span>
+                            </div>
+                        </div>
+
+                        <!-- Phase 5 -->
+                        <div class="pipeline-phase-card">
+                            <div class="phase-header-row">
+                                <h3 class="phase-title">Phase 5: Zero-Knowledge Blind Extraction</h3>
+                                <span class="phase-number-badge">Phase 05</span>
+                            </div>
+                            <p style="font-size: 0.88rem; margin: 0; color: var(--text-muted);">Geometric realigning, parity extraction, and symmetric decryption.</p>
+                            <div class="pipeline-flow-steps">
+                                <span class="flow-step-pill">Attacked Image (I<sub>attacked</sub>)</span>
+                                <span class="flow-arrow">&rarr;</span>
+                                <span class="flow-step-pill"><strong>ORB-RANSAC Feature Alignment</strong> (8-DOF Homography)</span>
+                                <span class="flow-arrow">&rarr;</span>
+                                <span class="flow-step-pill">DWT-SVD Sub-band Extraction</span>
+                                <span class="flow-arrow">&rarr;</span>
+                                <span class="flow-step-pill">QIM Parity Bit Extraction</span>
+                                <span class="flow-arrow">&rarr;</span>
+                                <span class="flow-step-pill"><strong>9&times; Majority Voting</strong></span>
+                                <span class="flow-arrow">&rarr;</span>
+                                <span class="flow-step-pill">AES-256 Decryption</span>
+                                <span class="flow-arrow">&rarr;</span>
+                                <span class="flow-step-pill"><strong>Recovered Message (M)</strong></span>
+                            </div>
+                        </div>
+
+                    </div>
                 </section>
 
+                <!-- ── ATTACK RESILIENCE COMPARISON CHART ── -->
                 <section class="detail-section">
-                    <h2>Key Contributions &amp; Experimental Results</h2>
-                    <ul class="detail-list">
-                        <li><strong>Extensive Benchmark:</strong> Evaluated across 210 standard images from the USC-SIPI database (6,300 total evaluations across 5 attack conditions), significantly outperforming baseline DCT, DWT, DWT-SVD, LSB, and standalone QIM schemes.</li>
-                        <li><strong>High Visual Quality:</strong> Maintained an unattacked peak PSNR of 39.92 dB and post-attack average PSNR of 33.09 dB with an average SSIM of 0.7403.</li>
-                        <li><strong>Robust Attack Resilience:</strong> Achieved low Bit Error Rates (BER) under heavy JPEG compression (Q = 50, BER = 0.2230), Gaussian noise (&sigma; = 10, BER = 0.2582), 5&times;5 blur (BER = 0.2914), and 10&deg; geometric rotation (BER = 0.4107).</li>
-                        <li><strong>High Message Recovery Rate (MRR):</strong> Reached 45.71% 100% error-free payload string recovery under lossy JPEG (Q = 50) and 37.14% under Gaussian noise via 9&times; majority voting.</li>
-                    </ul>
+                    <h2>Attack Resilience Comparison (Bit Error Rate - BER)</h2>
+                    <p>Lower BER indicates superior robustness against post-processing and geometric attacks.</p>
+
+                    <div class="comparison-chart">
+                        <div class="comp-row">
+                            <div class="comp-label">Proposed Method</div>
+                            <div class="comp-bar-bg">
+                                <div class="comp-bar-fill highlight" style="width: 27.4%;"></div>
+                            </div>
+                            <div class="comp-value">0.2746</div>
+                        </div>
+                        <div class="comp-row">
+                            <div class="comp-label">DWT-SVD</div>
+                            <div class="comp-bar-bg">
+                                <div class="comp-bar-fill" style="width: 41.1%;"></div>
+                            </div>
+                            <div class="comp-value">0.4116</div>
+                        </div>
+                        <div class="comp-row">
+                            <div class="comp-label">LSB</div>
+                            <div class="comp-bar-bg">
+                                <div class="comp-bar-fill" style="width: 38.0%;"></div>
+                            </div>
+                            <div class="comp-value">0.3807</div>
+                        </div>
+                        <div class="comp-row">
+                            <div class="comp-label">QIM (Standalone)</div>
+                            <div class="comp-bar-bg">
+                                <div class="comp-bar-fill" style="width: 36.3%;"></div>
+                            </div>
+                            <div class="comp-value">0.3639</div>
+                        </div>
+                        <div class="comp-row">
+                            <div class="comp-label">DCT</div>
+                            <div class="comp-bar-bg">
+                                <div class="comp-bar-fill" style="width: 33.6%;"></div>
+                            </div>
+                            <div class="comp-value">0.3365</div>
+                        </div>
+                    </div>
                 </section>
 
                 <section class="detail-section">
