@@ -4,12 +4,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Intelligent Threat Defender — Taneesha Iyenshi</title>
+    <title>AI-Driven Cyber Threat Intelligence — Taneesha Iyenshi</title>
     <meta name="description"
-        content="A real-time ML-powered browser extension for malicious URL detection and blocking.">
+        content="An AI-driven Cyber Threat Intelligence (CTI) pipeline automating threat extraction from open and dark web sources using domain-specific NLP models, knowledge graphs, and retrieval-augmented generation (RAG).">
     <link rel="icon" type="image/jpeg" href="../../img/Profile.jpeg">
     <link rel="stylesheet" href="../../style.css">
     <script src="../../theme.js"></script>
+    <style>
+        .cti-meta-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.25rem 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .cti-meta-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .cti-meta-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+        }
+
+        .cti-meta-value {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-color);
+            line-height: 1.45;
+        }
+
+        .cti-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.85rem;
+            margin-top: 0.85rem;
+        }
+
+        .cti-list li {
+            position: relative;
+            padding-left: 1.25rem;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.75;
+        }
+
+        .cti-list li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        .cti-list li strong {
+            color: var(--text-color);
+        }
+    </style>
 </head>
 
 <body>
@@ -33,7 +94,7 @@
 
     <main class="container">
 
-        <div class="page-header">
+        <div class="page-header" style="padding-bottom:0;">
             <a href="../../projects/" class="back-link">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -47,12 +108,33 @@
 
             <header class="project-detail-header">
                 <div class="project-detail-meta">
-                    <span class="project-year">2024</span>
-                    <span class="project-status status-completed">Completed</span>
+                    <span class="project-year">2026</span>
+                    <span class="project-status status-ongoing">Work in Progress</span>
                 </div>
-                <h1 class="project-detail-title">Intelligent Threat Defender</h1>
-                <div class="project-tags large-tags">
-                    <span>JavaScript</span><span>Machine Learning</span><span>NLP</span><span>Browser Extension</span>
+                <h1 class="project-detail-title">AI-Driven Cyber Threat Intelligence: Automated Threat Extraction and Analysis from Open and Dark Web Sources</h1>
+                <p style="color: var(--text-muted); font-size: 1rem; line-height: 1.7; margin-bottom: 1rem;">An end-to-end AI-driven Cyber Threat Intelligence (CTI) pipeline designed to automate the collection, extraction, validation, and natural-language querying of threat data from unstructured open and dark web sources.</p>
+
+                <div class="cti-meta-grid">
+                    <div class="cti-meta-item">
+                        <span class="cti-meta-label">Institution</span>
+                        <span class="cti-meta-value">University of Ruhuna, Sri Lanka</span>
+                    </div>
+                    <div class="cti-meta-item">
+                        <span class="cti-meta-label">Supervision Role</span>
+                        <span class="cti-meta-value">Co-Supervisor (Ms. Taneesha Iyenshi)<br><small style="color:var(--text-muted); font-weight:normal;">Supervisor: Dr. Kushan Sudheera</small></span>
+                    </div>
+                    <div class="cti-meta-item">
+                        <span class="cti-meta-label">Student Researchers</span>
+                        <span class="cti-meta-value">I.K.Y.K. Gunawardhana &middot; H.M.L.B. Herath<br>K.G.M. Levmanthi &middot; G.G.A. Sandaruwan</span>
+                    </div>
+                    <div class="cti-meta-item">
+                        <span class="cti-meta-label">Domain</span>
+                        <span class="cti-meta-value">Cyber Threat Intelligence &middot; NLP &middot; Knowledge Graphs &middot; RAG</span>
+                    </div>
+                </div>
+
+                <div class="project-tags large-tags" style="margin-top: 1.5rem;">
+                    <span>Python</span><span>SecureBERT-NER</span><span>Llama 3</span><span>Neo4j</span><span>ChromaDB</span><span>PostgreSQL</span><span>FastAPI</span><span>Tor / SOCKS5</span>
                 </div>
             </header>
 
@@ -60,44 +142,26 @@
 
                 <section class="detail-section">
                     <h2>Overview</h2>
-                    <p>Intelligent Threat Defender is a browser extension designed to classify and block malicious URLs
-                        in real-time at the client side. Rather than relying solely on blocklists — which cannot keep up
-                        with the rate of new phishing and malware domains — the system employs a machine learning
-                        pipeline to detect novel, previously unseen threats based on URL structure and lexical
-                        properties.</p>
+                    <p>This ongoing research project addresses the challenge of triaging unstructured threat intelligence published across vendor threat reports, open-web security bulletins, and Tor-routed dark web forums. The system automates the ingestion, extraction, external validation, and relational modeling of unstructured threat material into a dual-store architecture (Knowledge Graph and Vector Index) accessible via a retrieval-augmented natural language interface.</p>
                 </section>
 
                 <section class="detail-section">
-                    <h2>Methodology</h2>
-                    <ul class="detail-list">
-                        <li><strong>Feature Extraction</strong> — URLs are parsed into lexical features (length, digit
-                            ratio, special character count, TLD entropy) and host-based features (domain age, IP
-                            presence, redirect depth).</li>
-                        <li><strong>ML Classification</strong> — A lightweight gradient-boosted decision tree model
-                            (optimized for inference speed) classifies each URL as benign or malicious.</li>
-                        <li><strong>Real-time Interception</strong> — The browser extension intercepts navigation
-                            events via the WebExtensions API before the page loads, querying the local model and
-                            blocking flagged URLs with a warning page.</li>
-                    </ul>
-                </section>
-
-                <section class="detail-section">
-                    <h2>Key Contributions</h2>
-                    <ul class="detail-list">
-                        <li>Achieved &gt; 95% classification accuracy on benchmark phishing datasets with sub-5ms
-                            inference time per URL.</li>
-                        <li>Entirely client-side inference — no data is sent to external servers, preserving user
-                            privacy.</li>
-                        <li>Lightweight model footprint (&lt; 500 KB), suitable for browser extension constraints.</li>
-                        <li>Extensible feature pipeline supporting future addition of NLP-based URL tokenisation.</li>
+                    <h2>Key Objectives &amp; Architecture</h2>
+                    <ul class="cti-list">
+                        <li><strong>Multi-Channel Ingestion</strong> — Collecting unstructured threat text from PDF reports, open-web security RSS feeds, and Tor hidden services via automated crawlers.</li>
+                        <li><strong>Domain-Specific Named Entity Recognition</strong> — Extracting threat actors, malware families, tools, vulnerabilities, and organizations using fine-tuned models such as SecureBERT-NER.</li>
+                        <li><strong>Indicator of Compromise (IoC) Extraction</strong> — Regex-based pattern extraction with automatic refanging for IP addresses, URLs, domains, hashes, and CVE identifiers.</li>
+                        <li><strong>Dual-Path Processing &amp; Knowledge Graph Construction</strong> — Simultaneously populating a ChromaDB vector store for dense semantic retrieval and a Neo4j property graph anchored to the MITRE ATT&amp;CK framework for relational reasoning.</li>
+                        <li><strong>External Validation Layer</strong> — Staging extractions in PostgreSQL and verifying indicators against authoritative external APIs (NVD, VirusTotal, AbuseIPDB).</li>
+                        <li><strong>Grounded RAG Query Engine</strong> — Combining dense semantic search and structured graph context to generate citation-backed analyst responses via local LLMs (Llama 3 via Ollama).</li>
                     </ul>
                 </section>
 
                 <section class="detail-section">
                     <h2>Technologies Used</h2>
                     <div class="project-tags large-tags">
-                        <span>JavaScript</span><span>WebExtensions API</span><span>Python (training)</span>
-                        <span>scikit-learn</span><span>ONNX Runtime</span><span>NLP</span>
+                        <span>Python</span><span>SecureBERT-NER</span><span>Llama 3</span><span>Ollama</span><span>spaCy</span>
+                        <span>Neo4j</span><span>ChromaDB</span><span>PostgreSQL</span><span>FastAPI</span><span>Next.js / React</span><span>Tor</span>
                     </div>
                 </section>
 
@@ -105,7 +169,7 @@
 
         </article>
 
-        <div class="project-nav-row">
+        <div class="project-nav-row" style="margin-top: 3rem; display: flex; justify-content: space-between;">
             <a href="../ai-rehabilitation/" class="project-nav-btn">
                 ← Previous Project
             </a>
