@@ -161,21 +161,15 @@ body {
 
 .photo-glow {
     position: absolute;
-    inset: -5px;
+    inset: -6px;
     border-radius: 50%;
-    background: conic-gradient(from 0deg, var(--accent-color), #818cf8, #38bdf8, #0ea5e9, var(--accent-color));
-    opacity: 0.45;
-    filter: blur(8px);
-    animation: spin-glow 7s linear infinite;
+    background: radial-gradient(circle, var(--accent-glow-strong) 0%, transparent 75%);
+    opacity: 0.6;
+    filter: blur(10px);
     z-index: 0;
-    transition: opacity 0.4s;
+    transition: opacity 0.3s ease, transform 0.3s ease;
 }
-.photo-wrapper:hover .photo-glow { opacity: 0.8; }
-
-@keyframes spin-glow {
-    from { transform: rotate(0deg); }
-    to   { transform: rotate(360deg); }
-}
+.photo-wrapper:hover .photo-glow { opacity: 0.95; transform: scale(1.05); }
 
 .profile-img {
     position: relative;
