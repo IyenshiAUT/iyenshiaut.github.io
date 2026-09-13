@@ -157,8 +157,17 @@
 
         <div style="max-width: 820px; margin-bottom: 4rem;">
 
+            <!-- Category Filter Bar -->
+            <div class="filter-bar">
+                <button class="filter-btn active" data-filter="all">✨ All Achievements</button>
+                <button class="filter-btn" data-filter="national">🏆 National Awards</button>
+                <button class="filter-btn" data-filter="competition">💻 Competitions &amp; Hacks</button>
+                <button class="filter-btn" data-filter="patent">📜 Patents &amp; Filings</button>
+                <button class="filter-btn" data-filter="academic">🎓 Academic &amp; Honors</button>
+            </div>
+
             <!-- 1. IESL UIY Award -->
-            <div class="award-card">
+            <div class="award-card" data-category="national">
                 <div class="award-header">
                     <span class="award-badge">🏆 National 2nd Place</span>
                     <span class="award-date">Oct 2025</span>
@@ -177,7 +186,7 @@
             </div>
 
             <!-- 2. Patent Application -->
-            <div class="award-card">
+            <div class="award-card" data-category="patent">
                 <div class="award-header">
                     <span class="award-badge">📜 Patent Application</span>
                     <span class="award-date">Jan 2026</span>
@@ -191,7 +200,7 @@
             </div>
 
             <!-- 3. Innovate with Ballerina -->
-            <div class="award-card">
+            <div class="award-card" data-category="competition">
                 <div class="award-header">
                     <span class="award-badge">🌟 Top 15 Finalist</span>
                     <span class="award-date">May 2025</span>
@@ -210,7 +219,7 @@
             </div>
 
             <!-- 4. Codefest AI Sprint -->
-            <div class="award-card">
+            <div class="award-card" data-category="competition">
                 <div class="award-header">
                     <span class="award-badge">🏅 Merit Award</span>
                     <span class="award-date">Dec 2024</span>
@@ -226,7 +235,7 @@
             </div>
 
             <!-- 5. MORA UXplore 1.0 -->
-            <div class="award-card">
+            <div class="award-card" data-category="competition">
                 <div class="award-header">
                     <span class="award-badge">🥉 2nd Runner-Up</span>
                     <span class="award-date">2024</span>
@@ -242,7 +251,7 @@
             </div>
 
             <!-- 6. Eminence 3.0 -->
-            <div class="award-card">
+            <div class="award-card" data-category="competition">
                 <div class="award-header">
                     <span class="award-badge">🥉 2nd Runner-Up</span>
                     <span class="award-date">Aug 2023</span>
@@ -261,7 +270,7 @@
             </div>
 
             <!-- 7. First Class Honours -->
-            <div class="award-card">
+            <div class="award-card" data-category="academic">
                 <div class="award-header">
                     <span class="award-badge">🎓 First Class Honours</span>
                     <span class="award-date">2026</span>
@@ -272,7 +281,7 @@
             </div>
 
             <!-- 8. Best Performer SIBT -->
-            <div class="award-card">
+            <div class="award-card" data-category="academic">
                 <div class="award-header">
                     <span class="award-badge">🥇 Best Performer</span>
                     <span class="award-date">2020 – 2021</span>
