@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Preventing Extraction-Time Hallucination in CTI via Neuro-Symbolic Evidence Grounding — Taneesha Iyenshi</title>
+    <title>Intrinsic Glass-Box Models vs. Post-Hoc XAI for Explainable Loan Approval — Taneesha Iyenshi</title>
     <meta name="description"
-        content="A Neuro-Symbolic Evidence-Grounding Framework combining deterministic sub-span containment guards, syntactic dependency parsing, and STIX 2.1 ontological disambiguation to eliminate LLM hallucination in cyber threat knowledge graphs.">
+        content="A comparative evaluation of intrinsic glass-box models (GAM, EBM, KAN) against 12 black-box gradient boosting ensembles for audit-compliant explainable loan approval prediction on 52,000 financial records.">
     <link rel="icon" type="image/jpeg" href="../../img/Profile.jpeg">
     <link rel="stylesheet" href="../../style.css">
     <script src="../../theme.js"></script>
@@ -109,28 +109,28 @@
             <header class="project-detail-header">
                 <div class="project-detail-meta">
                     <span class="project-year">2026</span>
-                    <span class="project-status status-ongoing">Work in Progress</span>
+                    <span class="project-status status-completed">Completed / Pending Acceptance</span>
                 </div>
-                <h1 class="project-detail-title">Preventing Extraction-Time Hallucination in Cyber Threat Intelligence via Neuro-Symbolic Evidence Grounding</h1>
-                <p style="color: var(--text-muted); font-size: 1rem; line-height: 1.7; margin-bottom: 1rem;">A novel Neuro-Symbolic Evidence-Grounding Framework that combines deterministic sub-span containment checks, syntactic dependency parsing, and STIX 2.1 / MITRE ATT&amp;CK ontological disambiguation with generative LLMs to suppress extraction-time hallucinations in security knowledge graphs.</p>
+                <h1 class="project-detail-title">Comparative Analysis of Intrinsic Glass-Box Models and Post-Hoc XAI Frameworks for Explainable Loan Approval Prediction</h1>
+                <p style="color: var(--text-muted); font-size: 1rem; line-height: 1.7; margin-bottom: 1rem;">A systematic comparative evaluation of intrinsic glass-box architectures (GAM, EBM, KAN) against 12 traditional linear and black-box gradient boosting classifiers on a 52,000-record credit dataset, establishing glass-box models as state-of-the-art solutions for transparent, audit-compliant financial AI.</p>
 
                 <div class="cti-meta-grid">
                     <div class="cti-meta-item">
-                        <span class="cti-meta-label">Project Status</span>
-                        <span class="cti-meta-value">Ongoing Research (Sept 2026)</span>
+                        <span class="cti-meta-label">Publication Status</span>
+                        <span class="cti-meta-value">Completed &amp; Pending Acceptance (2026)</span>
                     </div>
                     <div class="cti-meta-item">
                         <span class="cti-meta-label">Domain</span>
-                        <span class="cti-meta-value">Neuro-Symbolic AI &middot; LLM Hallucination Mitigation &middot; Cyber Threat Intelligence &middot; Knowledge Graphs</span>
+                        <span class="cti-meta-value">Explainable AI (XAI) &middot; Financial Machine Learning &middot; Regulatory Compliance (GDPR, ECOA)</span>
                     </div>
                     <div class="cti-meta-item">
-                        <span class="cti-meta-label">Benchmark Corpus</span>
-                        <span class="cti-meta-value">N = 7,393 Standardized CTI Samples (Mandiant APT1, FireEye APT28, MITRE ATT&amp;CK STIX 2.1)</span>
+                        <span class="cti-meta-label">Dataset &amp; Scope</span>
+                        <span class="cti-meta-value">52,000 Credit Applications &middot; 14 Models Benchmarked &middot; 12 Evaluation Metrics</span>
                     </div>
                 </div>
 
                 <div class="project-tags large-tags" style="margin-top: 1.5rem;">
-                    <span>Python</span><span>Neuro-Symbolic AI</span><span>Qwen2.5</span><span>Llama 3</span><span>PyTorch</span><span>spaCy</span><span>STIX 2.1</span><span>MITRE ATT&amp;CK</span><span>Ollama</span>
+                    <span>Python</span><span>Explainable AI (XAI)</span><span>EBM (InterpretML)</span><span>LogisticGAM</span><span>KAN</span><span>PyTorch</span><span>LightGBM</span><span>XGBoost</span><span>CatBoost</span><span>SHAP</span>
                 </div>
             </header>
 
@@ -138,25 +138,25 @@
 
                 <section class="detail-section">
                     <h2>Overview</h2>
-                    <p>Automated construction of Cyber Threat Intelligence (CTI) Knowledge Graphs relies on extracting relational triples ⟨Subject, Predicate, Object⟩ from unstructured threat reports. While conventional rule-based extractors achieve high precision, they suffer from poor recall. Conversely, generative Large Language Models (LLMs) achieve high true-positive recall but suffer from severe parametric hallucination when co-occurring entities lack explicit relational evidence in the text. This ongoing project introduces a deterministic programmatic gating framework to suppress ungrounded LLM inference before execution.</p>
+                    <p>In financial underwriting and automated credit risk scoring, opaque black-box machine learning models introduce severe regulatory and compliance risks under GDPR Article 22, FCRA, and ECOA adverse action mandates. While post-hoc explainability methods like SHAP and LIME attempt to approximate black-box behavior, they suffer from sampling instability, computational overhead, and surrogate fidelity trade-offs. This study presents a rigorous comparative benchmark of intrinsic glass-box architectures—Generalized Additive Models (GAM), Explainable Boosting Machines (EBM), and Kolmogorov-Arnold Networks (KAN)—demonstrating that glass-box models achieve predictive parity with top-performing gradient boosting ensembles while providing exact, unapproximated feature explanations.</p>
                 </section>
 
                 <section class="detail-section">
-                    <h2>Key Objectives &amp; Architecture</h2>
+                    <h2>Key Contributions &amp; Findings</h2>
                     <ul class="cti-list">
-                        <li><strong>Programmatic Evidence-Grounding Guards</strong> — Implementing a multi-level sequence of deterministic gating functions (Entity Sub-Span Containment, Sentence Boundary, Dependency Path Distance, and Lexical Trigger Guards) to reject candidate entity pairs prior to LLM escalation.</li>
-                        <li><strong>Zero-Cost Recall Preservation</strong> — Suppressing false-positive relation edges on distant and co-occurring negative entity pairs while preserving peak true-positive extraction performance.</li>
-                        <li><strong>Multi-Engine Extraction Framework</strong> — Developing a modular Python framework supporting local open-weight models (Qwen2.5-0.5B-Instruct, Llama 3 via PyTorch/Ollama) and cloud LLM backends.</li>
-                        <li><strong>STIX 2.1 / MITRE ATT&amp;CK Ontological Disambiguation</strong> — Enforcing domain-range object typing constraints to resolve schema-level ambiguities (e.g., distinguishing USES vs. EMPLOYE vs. EXPLOITS).</li>
-                        <li><strong>Benchmark Suite &amp; Reproducibility Pipeline</strong> — Standardized evaluation pipeline across 7,393 CTI relation extraction samples derived from Mandiant APT1, FireEye APT28, and MITRE ATT&amp;CK STIX 2.1 repositories.</li>
+                        <li><strong>Predictive Parity Without Accuracy Trade-Offs</strong> — Intrinsic glass-box models (LogisticGAM and ExplainableBoostingClassifier) achieve 85.11% test accuracy, 88.91% positive F1-score, and 0.8238 / 0.8218 ROC-AUC, matching top black-box ensembles (LightGBM 85.11%, CatBoost 85.11%).</li>
+                        <li><strong>Exact Additive Log-Odds Attribution</strong> — Eliminates post-hoc sampling errors by generating exact, unapproximated additive feature shape functions and local score decompositions (<code>logit(P) = β₀ + ∑ Scoreⱼ</code>), directly fulfilling legal adverse action notice requirements.</li>
+                        <li><strong>High Computational Efficiency</strong> — EBM trains in 2.80 seconds, outperforming traditional gradient boosting frameworks by 20×–40× in training speed while eliminating runtime post-hoc explanation overhead.</li>
+                        <li><strong>Diagnostic Evaluation of Tabular KANs</strong> — Uncovered optimization instability in edge-based continuous B-spline KANs on un-binned financial tabular data compared to tree-binned EBMs, providing key architectural insights for tabular deep learning.</li>
+                        <li><strong>Fair Lending &amp; Bias Auditing</strong> — Verified that financial risk features (Credit Score, Annual Income, Outstanding Debt) account for over 85% of total predictive weight, preventing demographic proxy bias in automated credit allocation.</li>
                     </ul>
                 </section>
 
                 <section class="detail-section">
                     <h2>Technologies Used</h2>
                     <div class="project-tags large-tags">
-                        <span>Python</span><span>Neuro-Symbolic AI</span><span>Qwen2.5</span><span>Llama 3</span><span>PyTorch</span><span>spaCy</span>
-                        <span>STIX 2.1</span><span>MITRE ATT&amp;CK</span><span>Ollama</span><span>OpenAI API</span>
+                        <span>Python</span><span>Explainable AI (XAI)</span><span>EBM (InterpretML)</span><span>pyGAM</span><span>KAN (pykan)</span>
+                        <span>PyTorch</span><span>LightGBM</span><span>XGBoost</span><span>CatBoost</span><span>SHAP</span><span>Scikit-learn</span>
                     </div>
                 </section>
 
@@ -165,10 +165,10 @@
         </article>
 
         <div class="project-nav-row" style="margin-top: 3rem; display: flex; justify-content: space-between;">
-            <a href="../explainable-loan-approval/" class="project-nav-btn">
+            <a href="../digital-watermarking/" class="project-nav-btn">
                 ← Previous Project
             </a>
-            <a href="../intelligent-threat-defender/" class="project-nav-btn">
+            <a href="../neuro-symbolic-cti/" class="project-nav-btn">
                 Next Project →
             </a>
         </div>
