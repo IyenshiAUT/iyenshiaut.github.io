@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Genome Matcher: Bioinformatics DNA Analysis Tool — Taneesha Iyenshi</title>
+    <meta name="description"
+        content="A pure functional bioinformatics DNA analysis tool written in Haskell featuring parallel mutation detection, 64-codon protein translation, risk classification, and a Scotty web interface.">
+    <link rel="icon" type="image/jpeg" href="../../img/Profile.jpeg">
+    <link rel="stylesheet" href="../../style.css">
+    <script src="../../theme.js"></script>
+    <style>
+        .cti-meta-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.25rem 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .cti-meta-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .cti-meta-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+        }
+
+        .cti-meta-value {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-color);
+            line-height: 1.45;
+        }
+
+        .cti-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.85rem;
+            margin-top: 0.85rem;
+        }
+
+        .cti-list li {
+            position: relative;
+            padding-left: 1.25rem;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.75;
+        }
+
+        .cti-list li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        .cti-list li strong {
+            color: var(--text-color);
+        }
+
+        /* Video Container */
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            background: #000;
+            margin-top: 1rem;
+            box-shadow: var(--shadow-hover-md);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .github-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            padding: 0.6rem 1.2rem;
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--text-color);
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            text-decoration: none;
+            transition: border-color 0.2s, color 0.2s, transform 0.2s;
+        }
+
+        .github-btn:hover {
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+
+        pre.code-block {
+            background: #090d16;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem 1.25rem;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 0.83rem;
+            line-height: 1.55;
+            color: #e2e8f0;
+            margin-top: 1rem;
+        }
+
+        html.light-mode pre.code-block {
+            background: #1e293b;
+            color: #f8fafc;
+        }
+
+        .code-kw { color: #f472b6; font-weight: bold; }
+        .code-fn { color: #38bdf8; font-weight: bold; }
+        .code-str { color: #34d399; }
+        .code-cm { color: #64748b; font-style: italic; }
+    </style>
+</head>
+
+<body>
+
+    <nav class="site-nav">
+        <div class="container nav-inner">
+            <a href="../../" class="nav-logo">Taneesha Iyenshi</a>
+            <ul class="nav-links">
+                <li><a href="../../">About</a></li>
+                <li><a href="../../experience/">Experience</a></li>
+                <li><a href="../../education/">Education</a></li>
+                <li><a href="../../publications/">Publications</a></li>
+                <li><a href="../../projects/" class="nav-highlight active">Projects</a></li>
+            </ul>
+            <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle light/dark mode">
+                <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+            </button>
+        </div>
+    </nav>
+
+    <main class="container">
+
+        <div class="page-header" style="padding-bottom:0;">
+            <a href="../../projects/" class="back-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+                All Projects
+            </a>
+        </div>
+
+        <article class="project-detail">
+
+            <header class="project-detail-header">
+                <div class="project-detail-meta">
+                    <span class="project-year">2025</span>
+                    <span class="project-status status-completed">Completed</span>
+                </div>
+                <h1 class="project-detail-title">Genome Matcher: Bioinformatics DNA Analysis Tool</h1>
+                <p style="color: var(--text-muted); font-size: 1rem; line-height: 1.7; margin-bottom: 1rem;">A high-reliability, pure functional bioinformatics DNA analysis system built in Haskell featuring parallel mutation detection, 64-codon protein translation, multi-level risk scoring, and a Scotty web API.</p>
+
+                <div class="cti-meta-grid">
+                    <div class="cti-meta-item">
+                        <span class="cti-meta-label">Course / Project</span>
+                        <span class="cti-meta-value">Functional Programming Technical Project (8th Semester)</span>
+                    </div>
+                    <div class="cti-meta-item">
+                        <span class="cti-meta-label">Language &amp; Architecture</span>
+                        <span class="cti-meta-value">Haskell (Pure FP, ADTs, Immutable Data, Scotty Web Framework)</span>
+                    </div>
+                    <div class="cti-meta-item">
+                        <span class="cti-meta-label">Performance Gain</span>
+                        <span class="cti-meta-value">3x Speedup via <code>parMap</code> Parallel Processing (0.15s &rarr; 0.05s)</span>
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; margin-top: 1rem;">
+                    <a href="https://github.com/IyenshiAUT/Genome-Matcher--Bioinformatics-Tool--Functional-Programming-Project.git" target="_blank" rel="noopener" class="github-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
+                        </svg>
+                        View Code on GitHub
+                    </a>
+                </div>
+
+                <div class="project-tags large-tags" style="margin-top: 1.5rem;">
+                    <span>Haskell</span><span>Functional Programming</span><span>Bioinformatics</span><span>Parallel Computing</span><span>Scotty</span><span>Algebraic Data Types</span><span>JSON API</span>
+                </div>
+            </header>
+
+            <div class="project-detail-body">
+
+                <!-- ═══ VIDEO DEMO SECTION ═══ -->
+                <section class="detail-section">
+                    <h2>Project Demonstration Video</h2>
+                    <p>Watch a full demonstration of the Genome Matcher tool, illustrating DNA parsing, mutation detection, risk classification, and parallel execution:</p>
+                    
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/cZZyrDFtpQQ" title="Genome Matcher Project Demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    </div>
+                </section>
+
+                <section class="detail-section">
+                    <h2>Overview &amp; Industrial Motivation</h2>
+                    <p>Analyzing DNA sequences to identify genetic mutations is critical for disease diagnosis and personalized medicine. Medical software demands high reliability, thread safety, deterministic outputs, and real-time processing performance. This project demonstrates how Functional Programming (FP) principles in Haskell eliminate entire classes of bugs (such as null pointer exceptions, race conditions, and temporal coupling) while enabling lock-free multi-core parallelism for genomic sequence analysis.</p>
+                </section>
+
+                <section class="detail-section">
+                    <h2>Key Implementation Features</h2>
+                    <ul class="cti-list">
+                        <li><strong>Mutation Detection</strong> — Compares reference and patient DNA sequences recursively to pinpoint base mutations and exact sequence positions.</li>
+                        <li><strong>Risk Classification</strong> — Categorizes mutation severity into five risk levels (<code>Benign</code>, <code>Low</code>, <code>Medium</code>, <code>High</code>, <code>Critical</code>) based on position and mutation type.</li>
+                        <li><strong>Protein Translation</strong> — Translates DNA nucleotide sequences into amino acid chains using a 64-codon lookup table.</li>
+                        <li><strong>Parallel Processing with <code>parMap</code></strong> — Utilizes Haskell's <code>Control.Parallel.Strategies</code> to distribute multi-patient analysis across CPU cores, achieving a 3x speedup (0.15s &rarr; 0.05s).</li>
+                        <li><strong>Pure Functional Core &amp; ADTs</strong> — Leverages strong compile-time type checking with Algebraic Data Types (<code>Base</code>, <code>AminoAcid</code>, <code>Mutation</code>, <code>RiskLevel</code>) and immutable data structures.</li>
+                        <li><strong>Scotty Web Service</strong> — Implements a lightweight RESTful web API for DNA sequence uploads and structured JSON analysis responses.</li>
+                    </ul>
+
+                    <pre class="code-block"><code><span class="code-cm">-- Algebraic Data Types &amp; Pure Function Signatures in Haskell</span>
+<span class="code-kw">data</span> Base = A | C | G | T <span class="code-kw">deriving</span> (Show, Eq, Generic, NFData)
+<span class="code-kw">type</span> DNA = [Base]
+
+<span class="code-kw">data</span> RiskLevel = Benign | Low | Medium | High | Critical
+<span class="code-kw">data</span> Mutation = Mutation { position :: Int, original :: Base, current :: Base, severity :: RiskLevel }
+
+<span class="code-cm">-- Parallel Patient Processing Pipeline</span>
+analyzeMultiplePatients :: DNA -&gt; [(String, DNA)] -&gt; [AnalysisReport]
+analyzeMultiplePatients refDNA patients = 
+    parMap rdeepseq (analyzePatient refDNA) patients</code></pre>
+                </section>
+
+                <section class="detail-section">
+                    <h2>Technologies Used</h2>
+                    <div class="project-tags large-tags">
+                        <span>Haskell</span><span>GHC</span><span>Scotty Web Framework</span><span>Control.Parallel</span>
+                        <span>Aeson (JSON)</span><span>DeepSeq</span><span>Algebraic Data Types</span>
+                    </div>
+                </section>
+
+            </div>
+
+        </article>
+
+        <div class="project-nav-row" style="margin-top: 3rem; display: flex; justify-content: space-between;">
+            <a href="../intelligent-threat-defender/" class="project-nav-btn">
+                ← Previous Project
+            </a>
+            <a href="../ai-rehabilitation/" class="project-nav-btn">
+                Next Project →
+            </a>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Taneesha Iyenshi &mdash; University of Ruhuna, Sri Lanka</p>
+    </footer>
+
+</body>
+
+</html>
