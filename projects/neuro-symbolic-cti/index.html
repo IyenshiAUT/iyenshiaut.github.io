@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI-Driven Cyber Threat Intelligence — Taneesha Iyenshi</title>
+    <title>Preventing Extraction-Time Hallucination in CTI via Neuro-Symbolic Evidence Grounding — Taneesha Iyenshi</title>
     <meta name="description"
-        content="An AI-driven Cyber Threat Intelligence (CTI) pipeline automating threat extraction from open and dark web sources using domain-specific NLP models, knowledge graphs, and retrieval-augmented generation (RAG).">
+        content="A Neuro-Symbolic Evidence-Grounding Framework combining deterministic sub-span containment guards, syntactic dependency parsing, and STIX 2.1 ontological disambiguation to eliminate LLM hallucination in cyber threat knowledge graphs.">
     <link rel="icon" type="image/jpeg" href="../../img/Profile.jpeg">
     <link rel="stylesheet" href="../../style.css">
     <script src="../../theme.js"></script>
@@ -111,30 +111,26 @@
                     <span class="project-year">2026</span>
                     <span class="project-status status-ongoing">Work in Progress</span>
                 </div>
-                <h1 class="project-detail-title">AI-Driven Cyber Threat Intelligence: Automated Threat Extraction and Analysis from Open and Dark Web Sources</h1>
-                <p style="color: var(--text-muted); font-size: 1rem; line-height: 1.7; margin-bottom: 1rem;">An end-to-end AI-driven Cyber Threat Intelligence (CTI) pipeline designed to automate the collection, extraction, validation, and natural-language querying of threat data from unstructured open and dark web sources.</p>
+                <h1 class="project-detail-title">Preventing Extraction-Time Hallucination in Cyber Threat Intelligence via Neuro-Symbolic Evidence Grounding</h1>
+                <p style="color: var(--text-muted); font-size: 1rem; line-height: 1.7; margin-bottom: 1rem;">A novel Neuro-Symbolic Evidence-Grounding Framework that combines deterministic sub-span containment checks, syntactic dependency parsing, and STIX 2.1 / MITRE ATT&amp;CK ontological disambiguation with generative LLMs to suppress extraction-time hallucinations in security knowledge graphs.</p>
 
                 <div class="cti-meta-grid">
                     <div class="cti-meta-item">
-                        <span class="cti-meta-label">Institution</span>
-                        <span class="cti-meta-value">University of Ruhuna, Sri Lanka</span>
-                    </div>
-                    <div class="cti-meta-item">
-                        <span class="cti-meta-label">Supervision Role</span>
-                        <span class="cti-meta-value">Co-Supervisor (Ms. Taneesha Iyenshi)<br><small style="color:var(--text-muted); font-weight:normal;">Supervisor: Dr. Kushan Sudheera</small></span>
-                    </div>
-                    <div class="cti-meta-item">
-                        <span class="cti-meta-label">Student Researchers</span>
-                        <span class="cti-meta-value">I.K.Y.K. Gunawardhana &middot; H.M.L.B. Herath<br>K.G.M. Levmanthi &middot; G.G.A. Sandaruwan</span>
+                        <span class="cti-meta-label">Project Status</span>
+                        <span class="cti-meta-value">Ongoing Research (Sept 2026)</span>
                     </div>
                     <div class="cti-meta-item">
                         <span class="cti-meta-label">Domain</span>
-                        <span class="cti-meta-value">Cyber Threat Intelligence &middot; NLP &middot; Knowledge Graphs &middot; RAG</span>
+                        <span class="cti-meta-value">Neuro-Symbolic AI &middot; LLM Hallucination Mitigation &middot; Cyber Threat Intelligence &middot; Knowledge Graphs</span>
+                    </div>
+                    <div class="cti-meta-item">
+                        <span class="cti-meta-label">Benchmark Corpus</span>
+                        <span class="cti-meta-value">N = 7,393 Standardized CTI Samples (Mandiant APT1, FireEye APT28, MITRE ATT&amp;CK STIX 2.1)</span>
                     </div>
                 </div>
 
                 <div class="project-tags large-tags" style="margin-top: 1.5rem;">
-                    <span>Python</span><span>SecureBERT-NER</span><span>Llama 3</span><span>Neo4j</span><span>ChromaDB</span><span>PostgreSQL</span><span>FastAPI</span><span>Tor / SOCKS5</span>
+                    <span>Python</span><span>Neuro-Symbolic AI</span><span>Qwen2.5</span><span>Llama 3</span><span>PyTorch</span><span>spaCy</span><span>STIX 2.1</span><span>MITRE ATT&amp;CK</span><span>Ollama</span>
                 </div>
             </header>
 
@@ -142,26 +138,25 @@
 
                 <section class="detail-section">
                     <h2>Overview</h2>
-                    <p>This ongoing research project addresses the challenge of triaging unstructured threat intelligence published across vendor threat reports, open-web security bulletins, and Tor-routed dark web forums. The system automates the ingestion, extraction, external validation, and relational modeling of unstructured threat material into a dual-store architecture (Knowledge Graph and Vector Index) accessible via a retrieval-augmented natural language interface.</p>
+                    <p>Automated construction of Cyber Threat Intelligence (CTI) Knowledge Graphs relies on extracting relational triples ⟨Subject, Predicate, Object⟩ from unstructured threat reports. While conventional rule-based extractors achieve high precision, they suffer from poor recall. Conversely, generative Large Language Models (LLMs) achieve high true-positive recall but suffer from severe parametric hallucination when co-occurring entities lack explicit relational evidence in the text. This ongoing project introduces a deterministic programmatic gating framework to suppress ungrounded LLM inference before execution.</p>
                 </section>
 
                 <section class="detail-section">
                     <h2>Key Objectives &amp; Architecture</h2>
                     <ul class="cti-list">
-                        <li><strong>Multi-Channel Ingestion</strong> — Collecting unstructured threat text from PDF reports, open-web security RSS feeds, and Tor hidden services via automated crawlers.</li>
-                        <li><strong>Domain-Specific Named Entity Recognition</strong> — Extracting threat actors, malware families, tools, vulnerabilities, and organizations using fine-tuned models such as SecureBERT-NER.</li>
-                        <li><strong>Indicator of Compromise (IoC) Extraction</strong> — Regex-based pattern extraction with automatic refanging for IP addresses, URLs, domains, hashes, and CVE identifiers.</li>
-                        <li><strong>Dual-Path Processing &amp; Knowledge Graph Construction</strong> — Simultaneously populating a ChromaDB vector store for dense semantic retrieval and a Neo4j property graph anchored to the MITRE ATT&amp;CK framework for relational reasoning.</li>
-                        <li><strong>External Validation Layer</strong> — Staging extractions in PostgreSQL and verifying indicators against authoritative external APIs (NVD, VirusTotal, AbuseIPDB).</li>
-                        <li><strong>Grounded RAG Query Engine</strong> — Combining dense semantic search and structured graph context to generate citation-backed analyst responses via local LLMs (Llama 3 via Ollama).</li>
+                        <li><strong>Programmatic Evidence-Grounding Guards</strong> — Implementing a multi-level sequence of deterministic gating functions (Entity Sub-Span Containment, Sentence Boundary, Dependency Path Distance, and Lexical Trigger Guards) to reject candidate entity pairs prior to LLM escalation.</li>
+                        <li><strong>Zero-Cost Recall Preservation</strong> — Suppressing false-positive relation edges on distant and co-occurring negative entity pairs while preserving peak true-positive extraction performance.</li>
+                        <li><strong>Multi-Engine Extraction Framework</strong> — Developing a modular Python framework supporting local open-weight models (Qwen2.5-0.5B-Instruct, Llama 3 via PyTorch/Ollama) and cloud LLM backends.</li>
+                        <li><strong>STIX 2.1 / MITRE ATT&amp;CK Ontological Disambiguation</strong> — Enforcing domain-range object typing constraints to resolve schema-level ambiguities (e.g., distinguishing USES vs. EMPLOYE vs. EXPLOITS).</li>
+                        <li><strong>Benchmark Suite &amp; Reproducibility Pipeline</strong> — Standardized evaluation pipeline across 7,393 CTI relation extraction samples derived from Mandiant APT1, FireEye APT28, and MITRE ATT&amp;CK STIX 2.1 repositories.</li>
                     </ul>
                 </section>
 
                 <section class="detail-section">
                     <h2>Technologies Used</h2>
                     <div class="project-tags large-tags">
-                        <span>Python</span><span>SecureBERT-NER</span><span>Llama 3</span><span>Ollama</span><span>spaCy</span>
-                        <span>Neo4j</span><span>ChromaDB</span><span>PostgreSQL</span><span>FastAPI</span><span>Next.js / React</span><span>Tor</span>
+                        <span>Python</span><span>Neuro-Symbolic AI</span><span>Qwen2.5</span><span>Llama 3</span><span>PyTorch</span><span>spaCy</span>
+                        <span>STIX 2.1</span><span>MITRE ATT&amp;CK</span><span>Ollama</span><span>OpenAI API</span>
                     </div>
                 </section>
 
@@ -170,11 +165,11 @@
         </article>
 
         <div class="project-nav-row" style="margin-top: 3rem; display: flex; justify-content: space-between;">
-            <a href="../neuro-symbolic-cti/" class="project-nav-btn">
-                &larr; Previous Project
+            <a href="../digital-watermarking/" class="project-nav-btn">
+                ← Previous Project
             </a>
-            <a href="../ai-rehabilitation/" class="project-nav-btn">
-                Next Project &rarr;
+            <a href="../intelligent-threat-defender/" class="project-nav-btn">
+                Next Project →
             </a>
         </div>
 
