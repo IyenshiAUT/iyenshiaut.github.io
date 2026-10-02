@@ -1556,3 +1556,97 @@ html.light-mode .photo-glow {
     from { opacity: 0; transform: translateY(8px); }
     to   { opacity: 1; transform: translateY(0); }
 }
+
+/* ─── Background Cyber Canvas ────────────────────────── */
+#cyber-bg-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: -1;
+    opacity: 0.65;
+}
+
+/* ─── Profile Photo Aura Ring ────────────────────────── */
+.photo-wrapper {
+    position: relative;
+    width: 140px;
+    height: 140px;
+}
+
+.photo-glow {
+    position: absolute;
+    inset: -6px;
+    border-radius: 50%;
+    background: conic-gradient(from 0deg, var(--accent-color), transparent 40%, var(--accent-color) 70%, transparent 100%);
+    opacity: 0.55;
+    filter: blur(8px);
+    z-index: 0;
+    animation: rotateAura 12s linear infinite;
+    transition: opacity 0.3s ease, filter 0.3s ease;
+}
+
+.photo-wrapper:hover .photo-glow {
+    opacity: 0.9;
+    filter: blur(12px);
+    animation-duration: 6s;
+}
+
+@keyframes rotateAura {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+}
+
+/* ─── Scroll Reveal Animations ──────────────────────── */
+.reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(22px);
+    transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1), transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+}
+
+.reveal-on-scroll.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Stagger delays for grid items */
+.reveal-delay-1 { transition-delay: 0.08s; }
+.reveal-delay-2 { transition-delay: 0.16s; }
+.reveal-delay-3 { transition-delay: 0.24s; }
+
+/* ─── Glassmorphism & Hover Sheen Enhancements ───────── */
+.interest-card,
+.project-card,
+.award-card,
+.project-list-item,
+.cv-card-banner {
+    position: relative;
+    overflow: hidden;
+}
+
+.interest-card::after,
+.project-card::after,
+.award-card::after,
+.project-list-item::after,
+.cv-card-banner::after {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.04), transparent);
+    transform: skewX(-20deg);
+    transition: left 0.75s ease;
+    pointer-events: none;
+}
+
+.interest-card:hover::after,
+.project-card:hover::after,
+.award-card:hover::after,
+.project-list-item:hover::after,
+.cv-card-banner:hover::after {
+    left: 140%;
+}
