@@ -19,7 +19,7 @@
     --border-color: #334155;
     --nav-height: 56px;
     --sidebar-width: 240px;
-    --max-width: 1440px;
+    --max-width: 1040px;
     --nav-bg: rgba(15, 23, 42, 0.88);
     --status-success: #34d399;
     --status-success-bg: rgba(52, 211, 153, 0.1);
@@ -71,7 +71,7 @@ body {
 .container {
     max-width: var(--max-width);
     margin: 0 auto;
-    padding: 0 2rem;
+    padding: 0 1.5rem;
 }
 
 /* ─── Navigation ─────────────────────────────────────── */
