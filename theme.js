@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initScrollReveal();
 });
 
-// Interactive Ambient Floating Glowing 3D Bubbles & Constellation Canvas
+// Subtle, Non-Distracting Ambient Neural Background Network
 function initCyberCanvas() {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     
@@ -126,115 +126,75 @@ function initCyberCanvas() {
     });
 
     let particles = [];
-    const particleCount = Math.min(Math.floor(width * 0.065), 75);
+    const particleCount = Math.min(Math.floor(width * 0.03), 35);
 
-    class GlowingBubble {
+    class AmbientNode {
         constructor() {
             this.reset(true);
         }
         reset(randomY = false) {
             this.x = Math.random() * width;
-            this.y = randomY ? Math.random() * height : height + Math.random() * 50;
-            // Radius ranging from 7px to 23px (large, highly visible spheres)
-            this.radius = Math.random() * 16 + 7;
-            this.baseRadius = this.radius;
-            this.vx = (Math.random() - 0.5) * 0.55;
-            this.vy = - (Math.random() * 0.5 + 0.3); // Float upwards gently
-            this.pulseSpeed = Math.random() * 0.035 + 0.015;
-            this.pulseAngle = Math.random() * Math.PI * 2;
+            this.y = randomY ? Math.random() * height : height + Math.random() * 20;
+            // Small, delicate node size (1.5px to 3.5px)
+            this.radius = Math.random() * 2.0 + 1.5;
+            this.vx = (Math.random() - 0.5) * 0.18; // Very slow, calm horizontal drift
+            this.vy = - (Math.random() * 0.18 + 0.08); // Very slow upward float
             this.sineAngle = Math.random() * Math.PI * 2;
-            this.sineSpeed = Math.random() * 0.02 + 0.008;
-            this.opacity = Math.random() * 0.35 + 0.55; // 0.55 to 0.90 high visibility opacity
+            this.sineSpeed = Math.random() * 0.01 + 0.003;
+            this.opacity = Math.random() * 0.25 + 0.15; // Soft, translucent 15% to 40% opacity
             
-            // Rich vibrant color palette
+            // Subdued theme colors: Soft Cyan, Soft Indigo, Soft Emerald
             const colors = [
-                { r: 56, g: 189, b: 248 },   // Vibrant Cyan
-                { r: 168, g: 85, b: 247 },   // Electric Purple
-                { r: 99, g: 102, b: 241 },   // Deep Indigo
-                { r: 52, g: 211, b: 153 },   // Emerald Green
-                { r: 244, g: 63, b: 94 }     // Magenta Accent
+                { r: 56, g: 189, b: 248 },   // Cyan
+                { r: 99, g: 102, b: 241 },   // Indigo
+                { r: 52, g: 211, b: 153 }    // Emerald
             ];
             this.color = colors[Math.floor(Math.random() * colors.length)];
         }
         update() {
             this.sineAngle += this.sineSpeed;
-            this.pulseAngle += this.pulseSpeed;
-            
-            this.x += this.vx + Math.sin(this.sineAngle) * 0.4;
+            this.x += this.vx + Math.sin(this.sineAngle) * 0.15;
             this.y += this.vy;
-            
-            // Pulse size gently
-            this.radius = this.baseRadius + Math.sin(this.pulseAngle) * 2.5;
 
-            // Interactive mouse repulsion force
+            // Soft, non-disruptive mouse interaction
             const dx = mouse.x - this.x;
             const dy = mouse.y - this.y;
             const dist = Math.sqrt(dx * dx + dy * dy);
-            if (dist < 150) {
+            if (dist < 120) {
                 const angle = Math.atan2(dy, dx);
-                const force = (150 - dist) / 150;
-                this.x -= Math.cos(angle) * force * 3.5;
-                this.y -= Math.sin(angle) * force * 3.5;
+                const force = (120 - dist) / 120;
+                this.x -= Math.cos(angle) * force * 0.8;
+                this.y -= Math.sin(angle) * force * 0.8;
             }
 
-            // Wrap around screen top & sides
-            if (this.y < -50 || this.x < -60 || this.x > width + 60) {
+            // Wrap around top & sides
+            if (this.y < -20 || this.x < -20 || this.x > width + 20) {
                 this.reset(false);
             }
         }
         draw() {
             const isLight = document.documentElement.classList.contains('light-mode');
-            const alphaMultiplier = isLight ? 0.9 : 1.0;
-
-            ctx.save();
+            const alpha = this.opacity * (isLight ? 0.7 : 1.0);
             const r = this.color.r;
             const g = this.color.g;
             const b = this.color.b;
-            const op = this.opacity * alphaMultiplier;
 
-            // 1. Outer Glow Blur Halo
-            ctx.shadowColor = `rgba(${r}, ${g}, ${b}, 0.85)`;
-            ctx.shadowBlur = this.radius * 2.2;
-
-            // 2. Main 3D Radial Sphere Fill
+            ctx.save();
             ctx.beginPath();
-            ctx.arc(this.x, this.y, Math.max(1, this.radius), 0, Math.PI * 2);
+            ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
 
-            const grad = ctx.createRadialGradient(
-                this.x - this.radius * 0.35,
-                this.y - this.radius * 0.35,
-                this.radius * 0.05,
-                this.x,
-                this.y,
-                this.radius
-            );
+            // Subtle glow halo
+            ctx.shadowColor = `rgba(${r}, ${g}, ${b}, 0.5)`;
+            ctx.shadowBlur = this.radius * 2;
 
-            grad.addColorStop(0, `rgba(${r}, ${g}, ${b}, ${Math.min(1, op + 0.35)})`);
-            grad.addColorStop(0.65, `rgba(${r}, ${g}, ${b}, ${op * 0.7})`);
-            grad.addColorStop(0.95, `rgba(${r}, ${g}, ${b}, ${op * 0.95})`);
-            grad.addColorStop(1, `rgba(${r}, ${g}, ${b}, 0)`);
-
-            ctx.fillStyle = grad;
+            ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${alpha})`;
             ctx.fill();
-
-            // 3. Glossy 3D Highlight Arc (Soap Bubble Reflection)
-            ctx.beginPath();
-            ctx.arc(
-                this.x - this.radius * 0.28,
-                this.y - this.radius * 0.28,
-                Math.max(0.5, this.radius * 0.35),
-                0,
-                Math.PI * 2
-            );
-            ctx.fillStyle = `rgba(255, 255, 255, ${Math.min(0.85, op + 0.25)})`;
-            ctx.fill();
-
             ctx.restore();
         }
     }
 
     for (let i = 0; i < particleCount; i++) {
-        particles.push(new GlowingBubble());
+        particles.push(new AmbientNode());
     }
 
     function animate() {
@@ -242,7 +202,7 @@ function initCyberCanvas() {
         const isLight = document.documentElement.classList.contains('light-mode');
         const lineColor = isLight ? 'rgba(2, 132, 199,' : 'rgba(56, 189, 248,';
 
-        // Draw connecting threads and bubbles
+        // Draw delicate connecting constellation threads
         for (let i = 0; i < particles.length; i++) {
             const p1 = particles[i];
             p1.update();
@@ -254,13 +214,13 @@ function initCyberCanvas() {
                 const dy = p1.y - p2.y;
                 const dist = Math.sqrt(dx * dx + dy * dy);
 
-                if (dist < 160) {
-                    const alpha = (1 - dist / 160) * (isLight ? 0.4 : 0.5);
+                if (dist < 130) {
+                    const alpha = (1 - dist / 130) * (isLight ? 0.12 : 0.18);
                     ctx.beginPath();
                     ctx.moveTo(p1.x, p1.y);
                     ctx.lineTo(p2.x, p2.y);
                     ctx.strokeStyle = `${lineColor} ${alpha})`;
-                    ctx.lineWidth = 1.4;
+                    ctx.lineWidth = 0.85;
                     ctx.stroke();
                 }
             }
