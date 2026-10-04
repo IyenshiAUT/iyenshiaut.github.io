@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initScrollReveal();
 });
 
-// Interactive Background Neural Grid Canvas
+// Interactive Ambient Floating Glowing Bubbles & Constellation Canvas
 function initCyberCanvas() {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     
@@ -118,45 +118,116 @@ function initCyberCanvas() {
     let width = (canvas.width = window.innerWidth);
     let height = (canvas.height = window.innerHeight);
 
-    let particles = [];
-    const particleCount = Math.min(Math.floor(width * 0.035), 45);
+    let mouse = { x: -1000, y: -1000 };
 
-    class Particle {
+    window.addEventListener('mousemove', (e) => {
+        mouse.x = e.clientX;
+        mouse.y = e.clientY;
+    });
+
+    let particles = [];
+    const particleCount = Math.min(Math.floor(width * 0.045), 55);
+
+    class GlowingBubble {
         constructor() {
-            this.reset();
+            this.reset(true);
         }
-        reset() {
+        reset(randomY = false) {
             this.x = Math.random() * width;
-            this.y = Math.random() * height;
-            this.vx = (Math.random() - 0.5) * 0.35;
-            this.vy = (Math.random() - 0.5) * 0.35;
-            this.radius = Math.random() * 1.5 + 0.8;
+            this.y = randomY ? Math.random() * height : height + Math.random() * 40;
+            this.radius = Math.random() * 9 + 4; // 4px to 13px prominently visible
+            this.baseRadius = this.radius;
+            this.vx = (Math.random() - 0.5) * 0.45;
+            this.vy = - (Math.random() * 0.45 + 0.2); // float gently upwards
+            this.pulseSpeed = Math.random() * 0.03 + 0.015;
+            this.pulseAngle = Math.random() * Math.PI * 2;
+            this.sineAngle = Math.random() * Math.PI * 2;
+            this.sineSpeed = Math.random() * 0.02 + 0.005;
+            this.opacity = Math.random() * 0.45 + 0.45; // clear, vibrant visibility
+            
+            // Rich color palette: Cyan (#38bdf8), Indigo (#6366f1), Emerald (#34d399)
+            const colors = [
+                { r: 56, g: 189, b: 248 },  // vibrant cyan
+                { r: 99, g: 102, b: 241 },  // electric indigo
+                { r: 52, g: 211, b: 153 }   // emerald green
+            ];
+            this.color = colors[Math.floor(Math.random() * colors.length)];
         }
         update() {
-            this.x += this.vx;
+            this.sineAngle += this.sineSpeed;
+            this.pulseAngle += this.pulseSpeed;
+            
+            this.x += this.vx + Math.sin(this.sineAngle) * 0.35;
             this.y += this.vy;
-            if (this.x < 0 || this.x > width) this.vx *= -1;
-            if (this.y < 0 || this.y > height) this.vy *= -1;
+            
+            // Pulse size gently
+            this.radius = this.baseRadius + Math.sin(this.pulseAngle) * 2.0;
+
+            // Interactive mouse repulsion force
+            const dx = mouse.x - this.x;
+            const dy = mouse.y - this.y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < 140) {
+                const angle = Math.atan2(dy, dx);
+                const force = (140 - dist) / 140;
+                this.x -= Math.cos(angle) * force * 3.0;
+                this.y -= Math.sin(angle) * force * 3.0;
+            }
+
+            // Wrap around top / sides
+            if (this.y < -30 || this.x < -40 || this.x > width + 40) {
+                this.reset(false);
+            }
+        }
+        draw() {
+            const isLight = document.documentElement.classList.contains('light-mode');
+            const alphaMultiplier = isLight ? 0.85 : 1.0;
+
+            ctx.save();
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, Math.max(0.5, this.radius), 0, Math.PI * 2);
+
+            // Radial gradient for 3D glowing sphere look
+            const grad = ctx.createRadialGradient(
+                this.x - this.radius * 0.3,
+                this.y - this.radius * 0.3,
+                this.radius * 0.1,
+                this.x,
+                this.y,
+                this.radius
+            );
+            
+            const r = this.color.r;
+            const g = this.color.g;
+            const b = this.color.b;
+            const op = this.opacity * alphaMultiplier;
+
+            grad.addColorStop(0, `rgba(${r}, ${g}, ${b}, ${Math.min(1, op + 0.35)})`);
+            grad.addColorStop(0.65, `rgba(${r}, ${g}, ${b}, ${op * 0.65})`);
+            grad.addColorStop(1, `rgba(${r}, ${g}, ${b}, 0)`);
+
+            ctx.fillStyle = grad;
+            ctx.shadowColor = `rgba(${r}, ${g}, ${b}, 0.75)`;
+            ctx.shadowBlur = this.radius * 1.8;
+            ctx.fill();
+            ctx.restore();
         }
     }
 
     for (let i = 0; i < particleCount; i++) {
-        particles.push(new Particle());
+        particles.push(new GlowingBubble());
     }
 
     function animate() {
         ctx.clearRect(0, 0, width, height);
         const isLight = document.documentElement.classList.contains('light-mode');
-        const nodeColor = isLight ? 'rgba(2, 132, 199,' : 'rgba(56, 189, 248,';
+        const lineColor = isLight ? 'rgba(2, 132, 199,' : 'rgba(56, 189, 248,';
 
+        // Draw connecting threads and bubbles
         for (let i = 0; i < particles.length; i++) {
             const p1 = particles[i];
             p1.update();
-
-            ctx.beginPath();
-            ctx.arc(p1.x, p1.y, p1.radius, 0, Math.PI * 2);
-            ctx.fillStyle = `${nodeColor} 0.5)`;
-            ctx.fill();
+            p1.draw();
 
             for (let j = i + 1; j < particles.length; j++) {
                 const p2 = particles[j];
@@ -164,13 +235,13 @@ function initCyberCanvas() {
                 const dy = p1.y - p2.y;
                 const dist = Math.sqrt(dx * dx + dy * dy);
 
-                if (dist < 135) {
-                    const alpha = (1 - dist / 135) * 0.22;
+                if (dist < 155) {
+                    const alpha = (1 - dist / 155) * (isLight ? 0.32 : 0.42);
                     ctx.beginPath();
                     ctx.moveTo(p1.x, p1.y);
                     ctx.lineTo(p2.x, p2.y);
-                    ctx.strokeStyle = `${nodeColor} ${alpha})`;
-                    ctx.lineWidth = 0.75;
+                    ctx.strokeStyle = `${lineColor} ${alpha})`;
+                    ctx.lineWidth = 1.25;
                     ctx.stroke();
                 }
             }

@@ -1566,7 +1566,7 @@ html.light-mode .photo-glow {
     height: 100vh;
     pointer-events: none;
     z-index: -1;
-    opacity: 0.65;
+    opacity: 0.92;
 }
 
 /* ─── Profile Photo Aura Ring ────────────────────────── */
