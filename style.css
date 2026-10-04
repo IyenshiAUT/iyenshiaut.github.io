@@ -1576,6 +1576,90 @@ html.light-mode .photo-glow {
     display: none;
 }
 
+/* ─── Modern Ambient Cyber Aurora & Tech Grid Background ─── */
+.bg-ambient-layer {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.bg-tech-grid {
+    position: absolute;
+    inset: 0;
+    background-image: 
+        linear-gradient(to right, rgba(56, 189, 248, 0.035) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(56, 189, 248, 0.035) 1px, transparent 1px);
+    background-size: 52px 52px;
+    mask-image: radial-gradient(circle at 50% 35%, black 40%, transparent 85%);
+    -webkit-mask-image: radial-gradient(circle at 50% 35%, black 40%, transparent 85%);
+}
+
+html.light-mode .bg-tech-grid {
+    background-image: 
+        linear-gradient(to right, rgba(2, 132, 199, 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(2, 132, 199, 0.04) 1px, transparent 1px);
+}
+
+.aurora-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: 0.22;
+    pointer-events: none;
+    will-change: transform;
+}
+
+html.light-mode .aurora-orb {
+    opacity: 0.14;
+}
+
+.aurora-orb-1 {
+    top: -12%;
+    right: -8%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, #38bdf8 0%, #6366f1 70%, transparent 100%);
+    animation: auroraFloat1 24s ease-in-out infinite alternate;
+}
+
+.aurora-orb-2 {
+    bottom: -15%;
+    left: -10%;
+    width: 650px;
+    height: 650px;
+    background: radial-gradient(circle, #6366f1 0%, #34d399 70%, transparent 100%);
+    animation: auroraFloat2 28s ease-in-out infinite alternate;
+}
+
+.aurora-orb-3 {
+    top: 35%;
+    left: 25%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, #38bdf8 0%, #a855f7 70%, transparent 100%);
+    animation: auroraFloat3 26s ease-in-out infinite alternate;
+}
+
+@keyframes auroraFloat1 {
+    0%   { transform: translate(0, 0) scale(1); }
+    50%  { transform: translate(-70px, 60px) scale(1.1); }
+    100% { transform: translate(50px, 90px) scale(0.95); }
+}
+
+@keyframes auroraFloat2 {
+    0%   { transform: translate(0, 0) scale(1); }
+    50%  { transform: translate(80px, -70px) scale(1.12); }
+    100% { transform: translate(-40px, -50px) scale(0.9); }
+}
+
+@keyframes auroraFloat3 {
+    0%   { transform: translate(0, 0) scale(0.9); opacity: 0.14; }
+    50%  { transform: translate(-50px, -60px) scale(1.15); opacity: 0.25; }
+    100% { transform: translate(60px, 40px) scale(0.98); opacity: 0.18; }
+}
+
 /* ─── Profile Photo Aura Ring ────────────────────────── */
 .photo-wrapper {
     position: relative;

@@ -97,9 +97,27 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 4. Scroll-Triggered Reveal Animations
+    // 4. Modern Ambient Cyber Aurora & Tech Grid Background
+    initAmbientBackground();
+
+    // 5. Scroll-Triggered Reveal Animations
     initScrollReveal();
 });
+
+// Modern Ambient Cyber Aurora & Tech Grid Background Initialization
+function initAmbientBackground() {
+    if (document.querySelector('.bg-ambient-layer')) return;
+    
+    const layer = document.createElement('div');
+    layer.className = 'bg-ambient-layer';
+    layer.innerHTML = `
+        <div class="bg-tech-grid"></div>
+        <div class="aurora-orb aurora-orb-1"></div>
+        <div class="aurora-orb aurora-orb-2"></div>
+        <div class="aurora-orb aurora-orb-3"></div>
+    `;
+    document.body.prepend(layer);
+}
 
 // Scroll Reveal Observer for Smooth Section & Card Entrance Animations
 function initScrollReveal() {
