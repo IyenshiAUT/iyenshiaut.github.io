@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initScrollReveal();
 });
 
-// Interactive Ambient Floating Glowing Bubbles & Constellation Canvas
+// Interactive Ambient Floating Glowing 3D Bubbles & Constellation Canvas
 function initCyberCanvas() {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     
@@ -126,7 +126,7 @@ function initCyberCanvas() {
     });
 
     let particles = [];
-    const particleCount = Math.min(Math.floor(width * 0.045), 55);
+    const particleCount = Math.min(Math.floor(width * 0.065), 75);
 
     class GlowingBubble {
         constructor() {
@@ -134,22 +134,25 @@ function initCyberCanvas() {
         }
         reset(randomY = false) {
             this.x = Math.random() * width;
-            this.y = randomY ? Math.random() * height : height + Math.random() * 40;
-            this.radius = Math.random() * 9 + 4; // 4px to 13px prominently visible
+            this.y = randomY ? Math.random() * height : height + Math.random() * 50;
+            // Radius ranging from 7px to 23px (large, highly visible spheres)
+            this.radius = Math.random() * 16 + 7;
             this.baseRadius = this.radius;
-            this.vx = (Math.random() - 0.5) * 0.45;
-            this.vy = - (Math.random() * 0.45 + 0.2); // float gently upwards
-            this.pulseSpeed = Math.random() * 0.03 + 0.015;
+            this.vx = (Math.random() - 0.5) * 0.55;
+            this.vy = - (Math.random() * 0.5 + 0.3); // Float upwards gently
+            this.pulseSpeed = Math.random() * 0.035 + 0.015;
             this.pulseAngle = Math.random() * Math.PI * 2;
             this.sineAngle = Math.random() * Math.PI * 2;
-            this.sineSpeed = Math.random() * 0.02 + 0.005;
-            this.opacity = Math.random() * 0.45 + 0.45; // clear, vibrant visibility
+            this.sineSpeed = Math.random() * 0.02 + 0.008;
+            this.opacity = Math.random() * 0.35 + 0.55; // 0.55 to 0.90 high visibility opacity
             
-            // Rich color palette: Cyan (#38bdf8), Indigo (#6366f1), Emerald (#34d399)
+            // Rich vibrant color palette
             const colors = [
-                { r: 56, g: 189, b: 248 },  // vibrant cyan
-                { r: 99, g: 102, b: 241 },  // electric indigo
-                { r: 52, g: 211, b: 153 }   // emerald green
+                { r: 56, g: 189, b: 248 },   // Vibrant Cyan
+                { r: 168, g: 85, b: 247 },   // Electric Purple
+                { r: 99, g: 102, b: 241 },   // Deep Indigo
+                { r: 52, g: 211, b: 153 },   // Emerald Green
+                { r: 244, g: 63, b: 94 }     // Magenta Accent
             ];
             this.color = colors[Math.floor(Math.random() * colors.length)];
         }
@@ -157,59 +160,75 @@ function initCyberCanvas() {
             this.sineAngle += this.sineSpeed;
             this.pulseAngle += this.pulseSpeed;
             
-            this.x += this.vx + Math.sin(this.sineAngle) * 0.35;
+            this.x += this.vx + Math.sin(this.sineAngle) * 0.4;
             this.y += this.vy;
             
             // Pulse size gently
-            this.radius = this.baseRadius + Math.sin(this.pulseAngle) * 2.0;
+            this.radius = this.baseRadius + Math.sin(this.pulseAngle) * 2.5;
 
             // Interactive mouse repulsion force
             const dx = mouse.x - this.x;
             const dy = mouse.y - this.y;
             const dist = Math.sqrt(dx * dx + dy * dy);
-            if (dist < 140) {
+            if (dist < 150) {
                 const angle = Math.atan2(dy, dx);
-                const force = (140 - dist) / 140;
-                this.x -= Math.cos(angle) * force * 3.0;
-                this.y -= Math.sin(angle) * force * 3.0;
+                const force = (150 - dist) / 150;
+                this.x -= Math.cos(angle) * force * 3.5;
+                this.y -= Math.sin(angle) * force * 3.5;
             }
 
-            // Wrap around top / sides
-            if (this.y < -30 || this.x < -40 || this.x > width + 40) {
+            // Wrap around screen top & sides
+            if (this.y < -50 || this.x < -60 || this.x > width + 60) {
                 this.reset(false);
             }
         }
         draw() {
             const isLight = document.documentElement.classList.contains('light-mode');
-            const alphaMultiplier = isLight ? 0.85 : 1.0;
+            const alphaMultiplier = isLight ? 0.9 : 1.0;
 
             ctx.save();
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, Math.max(0.5, this.radius), 0, Math.PI * 2);
-
-            // Radial gradient for 3D glowing sphere look
-            const grad = ctx.createRadialGradient(
-                this.x - this.radius * 0.3,
-                this.y - this.radius * 0.3,
-                this.radius * 0.1,
-                this.x,
-                this.y,
-                this.radius
-            );
-            
             const r = this.color.r;
             const g = this.color.g;
             const b = this.color.b;
             const op = this.opacity * alphaMultiplier;
 
+            // 1. Outer Glow Blur Halo
+            ctx.shadowColor = `rgba(${r}, ${g}, ${b}, 0.85)`;
+            ctx.shadowBlur = this.radius * 2.2;
+
+            // 2. Main 3D Radial Sphere Fill
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, Math.max(1, this.radius), 0, Math.PI * 2);
+
+            const grad = ctx.createRadialGradient(
+                this.x - this.radius * 0.35,
+                this.y - this.radius * 0.35,
+                this.radius * 0.05,
+                this.x,
+                this.y,
+                this.radius
+            );
+
             grad.addColorStop(0, `rgba(${r}, ${g}, ${b}, ${Math.min(1, op + 0.35)})`);
-            grad.addColorStop(0.65, `rgba(${r}, ${g}, ${b}, ${op * 0.65})`);
+            grad.addColorStop(0.65, `rgba(${r}, ${g}, ${b}, ${op * 0.7})`);
+            grad.addColorStop(0.95, `rgba(${r}, ${g}, ${b}, ${op * 0.95})`);
             grad.addColorStop(1, `rgba(${r}, ${g}, ${b}, 0)`);
 
             ctx.fillStyle = grad;
-            ctx.shadowColor = `rgba(${r}, ${g}, ${b}, 0.75)`;
-            ctx.shadowBlur = this.radius * 1.8;
             ctx.fill();
+
+            // 3. Glossy 3D Highlight Arc (Soap Bubble Reflection)
+            ctx.beginPath();
+            ctx.arc(
+                this.x - this.radius * 0.28,
+                this.y - this.radius * 0.28,
+                Math.max(0.5, this.radius * 0.35),
+                0,
+                Math.PI * 2
+            );
+            ctx.fillStyle = `rgba(255, 255, 255, ${Math.min(0.85, op + 0.25)})`;
+            ctx.fill();
+
             ctx.restore();
         }
     }
@@ -235,13 +254,13 @@ function initCyberCanvas() {
                 const dy = p1.y - p2.y;
                 const dist = Math.sqrt(dx * dx + dy * dy);
 
-                if (dist < 155) {
-                    const alpha = (1 - dist / 155) * (isLight ? 0.32 : 0.42);
+                if (dist < 160) {
+                    const alpha = (1 - dist / 160) * (isLight ? 0.4 : 0.5);
                     ctx.beginPath();
                     ctx.moveTo(p1.x, p1.y);
                     ctx.lineTo(p2.x, p2.y);
                     ctx.strokeStyle = `${lineColor} ${alpha})`;
-                    ctx.lineWidth = 1.25;
+                    ctx.lineWidth = 1.4;
                     ctx.stroke();
                 }
             }
