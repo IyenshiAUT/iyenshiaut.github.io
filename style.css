@@ -72,6 +72,8 @@ body {
     max-width: var(--max-width);
     margin: 0 auto;
     padding: 0 1.5rem;
+    position: relative;
+    z-index: 5;
 }
 
 /* ─── Navigation ─────────────────────────────────────── */
@@ -1565,8 +1567,8 @@ html.light-mode .photo-glow {
     width: 100vw;
     height: 100vh;
     pointer-events: none;
-    z-index: -1;
-    opacity: 0.92;
+    z-index: 1;
+    opacity: 1;
 }
 
 /* ─── Profile Photo Aura Ring ────────────────────────── */
