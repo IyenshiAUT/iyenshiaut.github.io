@@ -66,6 +66,18 @@ body {
     line-height: 1.6;
     padding-top: var(--nav-height);
     transition: background-color 0.25s ease, color 0.25s ease;
+    position: relative;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: 
+        radial-gradient(circle at 85% 15%, var(--accent-glow) 0%, transparent 55%),
+        radial-gradient(circle at 15% 85%, var(--accent-bg) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
 }
 
 .container {
@@ -1561,14 +1573,7 @@ html.light-mode .photo-glow {
 
 /* ─── Background Cyber Canvas ────────────────────────── */
 #cyber-bg-canvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    pointer-events: none;
-    z-index: 1;
-    opacity: 0.45;
+    display: none;
 }
 
 /* ─── Profile Photo Aura Ring ────────────────────────── */
