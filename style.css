@@ -1571,9 +1571,17 @@ html.light-mode .photo-glow {
     to   { opacity: 1; transform: translateY(0); }
 }
 
-/* ─── Background Cyber Canvas ────────────────────────── */
+/* ─── High-Visibility Cyber Background Canvas ────────────────────────── */
 #cyber-bg-canvas {
-    display: none;
+    display: block !important;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.85;
 }
 
 /* ─── Modern Ambient Cyber Aurora & Tech Grid Background ─── */

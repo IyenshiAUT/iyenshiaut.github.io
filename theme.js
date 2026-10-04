@@ -97,26 +97,140 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 4. Modern Ambient Cyber Aurora & Tech Grid Background
-    initAmbientBackground();
+    // 4. High-Visibility Cyber Particle Constellation Background
+    initCyberCanvas();
 
     // 5. Scroll-Triggered Reveal Animations
     initScrollReveal();
 });
 
-// Modern Ambient Cyber Aurora & Tech Grid Background Initialization
-function initAmbientBackground() {
-    if (document.querySelector('.bg-ambient-layer')) return;
+// High-Visibility Cyber Particle Constellation Animation
+function initCyberCanvas() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     
-    const layer = document.createElement('div');
-    layer.className = 'bg-ambient-layer';
-    layer.innerHTML = `
-        <div class="bg-tech-grid"></div>
-        <div class="aurora-orb aurora-orb-1"></div>
-        <div class="aurora-orb aurora-orb-2"></div>
-        <div class="aurora-orb aurora-orb-3"></div>
-    `;
-    document.body.prepend(layer);
+    let canvas = document.getElementById('cyber-bg-canvas');
+    if (!canvas) {
+        canvas = document.createElement('canvas');
+        canvas.id = 'cyber-bg-canvas';
+        document.body.prepend(canvas);
+    }
+    const ctx = canvas.getContext('2d');
+    let width = (canvas.width = window.innerWidth);
+    let height = (canvas.height = window.innerHeight);
+
+    let mouse = { x: -1000, y: -1000 };
+    window.addEventListener('mousemove', (e) => {
+        mouse.x = e.clientX;
+        mouse.y = e.clientY;
+    });
+
+    let particles = [];
+    const particleCount = Math.min(Math.floor(width * 0.045), 55);
+
+    class CyberParticle {
+        constructor() {
+            this.reset(true);
+        }
+        reset(randomY = false) {
+            this.x = Math.random() * width;
+            this.y = randomY ? Math.random() * height : height + Math.random() * 30;
+            // Radius 2.5px to 5px (very distinct & clear)
+            this.radius = Math.random() * 2.5 + 2.5;
+            this.vx = (Math.random() - 0.5) * 0.4;
+            this.vy = - (Math.random() * 0.35 + 0.15);
+            this.sineAngle = Math.random() * Math.PI * 2;
+            this.sineSpeed = Math.random() * 0.015 + 0.005;
+            this.opacity = Math.random() * 0.35 + 0.45; // 0.45 to 0.80 solid visibility
+            
+            const colors = [
+                { r: 56, g: 189, b: 248 },   // Electric Cyan (#38bdf8)
+                { r: 99, g: 102, b: 241 },   // Indigo (#6366f1)
+                { r: 52, g: 211, b: 153 }    // Emerald (#34d399)
+            ];
+            this.color = colors[Math.floor(Math.random() * colors.length)];
+        }
+        update() {
+            this.sineAngle += this.sineSpeed;
+            this.x += this.vx + Math.sin(this.sineAngle) * 0.25;
+            this.y += this.vy;
+
+            // Gentle mouse attraction / drift
+            const dx = mouse.x - this.x;
+            const dy = mouse.y - this.y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < 130) {
+                const angle = Math.atan2(dy, dx);
+                const force = (130 - dist) / 130;
+                this.x -= Math.cos(angle) * force * 1.5;
+                this.y -= Math.sin(angle) * force * 1.5;
+            }
+
+            if (this.y < -20 || this.x < -30 || this.x > width + 30) {
+                this.reset(false);
+            }
+        }
+        draw() {
+            const isLight = document.documentElement.classList.contains('light-mode');
+            const r = this.color.r;
+            const g = this.color.g;
+            const b = this.color.b;
+            const op = this.opacity * (isLight ? 0.75 : 1.0);
+
+            ctx.save();
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+
+            // Radiant glow halo
+            ctx.shadowColor = `rgba(${r}, ${g}, ${b}, 0.85)`;
+            ctx.shadowBlur = this.radius * 2.5;
+
+            ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${op})`;
+            ctx.fill();
+            ctx.restore();
+        }
+    }
+
+    for (let i = 0; i < particleCount; i++) {
+        particles.push(new CyberParticle());
+    }
+
+    function animate() {
+        ctx.clearRect(0, 0, width, height);
+        const isLight = document.documentElement.classList.contains('light-mode');
+        const lineColor = isLight ? 'rgba(2, 132, 199,' : 'rgba(56, 189, 248,';
+
+        // Draw connecting constellation lines & particles
+        for (let i = 0; i < particles.length; i++) {
+            const p1 = particles[i];
+            p1.update();
+            p1.draw();
+
+            for (let j = i + 1; j < particles.length; j++) {
+                const p2 = particles[j];
+                const dx = p1.x - p2.x;
+                const dy = p1.y - p2.y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+
+                if (dist < 140) {
+                    const alpha = (1 - dist / 140) * (isLight ? 0.25 : 0.35);
+                    ctx.beginPath();
+                    ctx.moveTo(p1.x, p1.y);
+                    ctx.lineTo(p2.x, p2.y);
+                    ctx.strokeStyle = `${lineColor} ${alpha})`;
+                    ctx.lineWidth = 1.1;
+                    ctx.stroke();
+                }
+            }
+        }
+        requestAnimationFrame(animate);
+    }
+
+    animate();
+
+    window.addEventListener('resize', () => {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+    });
 }
 
 // Scroll Reveal Observer for Smooth Section & Card Entrance Animations
