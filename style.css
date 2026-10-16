@@ -1498,6 +1498,48 @@ html.light-mode .photo-glow {
     transform: scale(1.025);
 }
 
+.award-media::after {
+    content: '🔍 Click to view full image';
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background: rgba(15, 23, 42, 0.88);
+    color: var(--accent-color);
+    border: 1px solid var(--accent-border, rgba(56, 189, 248, 0.3));
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 0.22rem 0.6rem;
+    border-radius: 20px;
+    backdrop-filter: blur(8px);
+    opacity: 0;
+    transform: translateY(4px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    pointer-events: none;
+    z-index: 2;
+}
+
+html.light-mode .award-media::after {
+    background: rgba(255, 255, 255, 0.94);
+    color: var(--accent-color);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+.award-media:hover::after {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.volunteer-media-single {
+    margin-top: 1rem;
+    max-width: 360px;
+}
+
+@media (max-width: 600px) {
+    .volunteer-media-single {
+        max-width: 100%;
+    }
+}
+
 /* ─── Lightbox Modal System ────────────────────────────── */
 .lightbox-modal {
     position: fixed;
